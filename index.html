@@ -1,0 +1,2784 @@
+<!doctype html><html><head><meta charset=utf-8><title>Quiz Kewirausahaan di Era Digital</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* QuizLearn: monokrom hitam-putih-abu dengan efek kaca (glass).
+   Tata letak: satu kolom sempit seperti aplikasi HP, kartu kaca di atas latar abu bergradasi,
+   navigasi melayang di bawah. Semua warna diatur lewat variabel di bawah ini. */
+:root{
+  --bg:#E8E8E8;
+  --ink:#0A0A0A;
+  --ink-2:#4F4F4F;
+  --glass:rgba(255,255,255,.52);
+  --glass-hi:rgba(255,255,255,.72);
+  --edge:rgba(255,255,255,.82);
+  --track:rgba(0,0,0,.10);
+  --shadow:0 8px 24px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.9);
+  --dark-1:#2C2C2C;
+  --dark-2:#0A0A0A;
+  --font:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:14px;
+  line-height:1.5;
+}
+button,input,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.on-dark :focus-visible{outline-color:#fff}
+
+/* latar */
+.bg{
+  position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(320px 320px at 100% 0%, #fff 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(320px 320px at 0% 42%, rgba(90,90,90,.38) 0%, rgba(90,90,90,0) 70%),
+    radial-gradient(340px 340px at 100% 86%, rgba(60,60,60,.34) 0%, rgba(60,60,60,0) 70%),
+    linear-gradient(165deg,#F6F6F6 0%,#DCDCDC 48%,#F0F0F0 100%);
+}
+
+/* kerangka */
+.app{
+  max-width:520px;margin:0 auto;
+  padding-block:20px 120px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:40px;height:40px;border-radius:12px;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.brand-name{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.brand-sub{font-size:12px;color:var(--ink-2)}
+main{display:flex;flex-direction:column;gap:14px;min-width:0;outline:none}
+
+h1.h1{margin:6px 0 0;font-size:27px;font-weight:800;letter-spacing:-.025em;line-height:1.15;text-wrap:balance}
+h2.h2{margin:0;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+h3.h3{margin:0;font-size:15px;font-weight:700}
+.lead{margin:0;color:var(--ink-2);font-size:14px;line-height:1.5}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ink);flex:none}
+.muted{color:var(--ink-2)}
+.small{font-size:12px}
+
+/* kaca */
+.glass{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(20px) saturate(125%);
+  backdrop-filter:blur(20px) saturate(125%);
+  border:1px solid var(--edge);
+  box-shadow:var(--shadow);
+}
+.card{border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+
+/* tombol */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;padding:0 20px;border-radius:23px;
+  border:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(180deg,var(--dark-1),var(--dark-2));
+  color:#fff;font-weight:700;
+  box-shadow:0 8px 18px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.22);
+  text-align:center;
+}
+.btn[disabled]{background:rgba(0,0,0,.12);color:#5A5A5A;box-shadow:none;border-color:transparent;cursor:not-allowed}
+.btn-ghost{
+  background:var(--glass-hi);color:var(--ink);border:1px solid var(--edge);
+  box-shadow:0 4px 12px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.btn-ghost[disabled]{background:rgba(255,255,255,.35);color:#5A5A5A}
+.btn-light{background:rgba(255,255,255,.94);color:var(--ink);border-color:rgba(255,255,255,.9);box-shadow:none}
+.btn-sm{min-height:40px;padding:0 16px;font-size:13px}
+.btn-block{width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.btn{flex:1 1 120px}
+.back{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:40px;
+  padding:0 14px 0 10px;border-radius:20px;border:1px solid var(--edge);background:var(--glass-hi);font-weight:600;font-size:13px;
+}
+
+/* progress */
+.bar{height:8px;border-radius:4px;background:var(--track);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#3A3A3A,var(--ink))}
+
+/* statistik */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.stat{border-radius:20px;padding:12px 10px;display:flex;flex-direction:column;gap:6px}
+.stat svg{display:block}
+.stat b{font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;line-height:1.3;color:var(--ink-2)}
+
+/* kartu gelap */
+.dark{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,rgba(44,44,44,.94),rgba(10,10,10,.96));
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 14px 32px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.dark::before{
+  content:"";position:absolute;top:-70px;right:-50px;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 70%);pointer-events:none;
+}
+.dark>*{position:relative}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFCFCF}
+.dark .meta{color:#CFCFCF;font-size:13px}
+.cta{flex-direction:row;align-items:center;gap:14px;flex-wrap:wrap}
+.cta .grow{flex:1 1 160px;display:flex;flex-direction:column;gap:3px}
+.cta .t{font-size:17px;font-weight:700;line-height:1.25}
+
+/* daftar bab */
+.listbtn{
+  width:100%;text-align:left;flex-direction:row;align-items:center;gap:12px;color:var(--ink);
+}
+.listbtn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.listbtn .tt{font-weight:700;font-size:15px;line-height:1.3}
+.listbtn .ds{font-size:12px;color:var(--ink-2)}
+.num{
+  flex:none;width:44px;height:44px;border-radius:14px;border:1px solid var(--edge);
+  background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(210,210,210,.6));
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  box-shadow:0 6px 14px rgba(0,0,0,.08), inset 0 1px 0 #fff;
+}
+
+.note{font-size:12px;color:var(--ink-2);line-height:1.5}
+
+/* soal */
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* Transisi saat berpindah soal: kartu soal keluar sebentar, lalu masuk dari arah tujuan.
+   Hanya opacity dan transform yang dianimasikan agar tetap ringan di HP. */
+@keyframes qIn{from{opacity:0;transform:translate3d(var(--qx,18px),0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+.qsec.q-in-next{--qx:18px;animation:qIn .26s cubic-bezier(.22,.68,0,1) backwards;will-change:transform,opacity}
+.qsec.q-in-prev{--qx:-18px;animation:qIn .26s cubic-bezier(.22,.68,0,1) backwards;will-change:transform,opacity}
+.qsec.q-out-next,.qsec.q-out-prev{opacity:0;transition:opacity .11s ease-in,transform .11s ease-in;will-change:transform,opacity}
+.qsec.q-out-next{transform:translate3d(-12px,0,0)}
+.qsec.q-out-prev{transform:translate3d(12px,0,0)}
+#main.q-swap .qsec *{transition:none!important}
+@media(prefers-reduced-motion:reduce){.qsec.q-in-next,.qsec.q-in-prev{animation:none}.qsec.q-out-next,.qsec.q-out-prev{transition:none}.ov,.ov .sheet,.ov.is-closing,.ov.is-closing .sheet{animation:none!important}}
+/* Transisi halus untuk perubahan status (pilihan jawaban, progres, nomor soal, tombol kalkulator, dock) */
+html{scrollbar-gutter:stable}
+.opt{transition:background-color .22s ease,color .22s ease,border-color .22s ease,opacity .22s ease,transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,filter .18s ease}
+.opt .lt{transition:background-color .22s ease,color .22s ease,border-color .22s ease}
+.bar>i{transition:width .38s cubic-bezier(.22,.68,0,1)}
+.nb{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,filter .18s ease}
+.ck{transition:transform .12s cubic-bezier(.2,.8,.2,1),background-color .12s ease,box-shadow .12s ease,filter .12s ease}
+.cdisp .cd{transition:font-size .12s ease}
+.dock button{transition:background-color .25s ease,color .25s ease,transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,filter .18s ease}
+.ov{will-change:opacity}
+.ov .sheet{will-change:transform,opacity}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 12px;border-radius:14px;
+  background:var(--glass-hi);border:1px solid var(--edge);font-size:12px;font-weight:600;
+}
+.qtext{margin:0;font-size:17px;font-weight:700;line-height:1.4;text-wrap:pretty}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;min-height:52px;padding:12px 14px;border-radius:18px;
+  background:var(--glass-hi);border:1px solid var(--edge);
+  box-shadow:0 4px 12px rgba(0,0,0,.05), inset 0 1px 0 rgba(255,255,255,.9);
+  line-height:1.4;
+}
+.opt .lt{
+  flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin:0;
+}
+.opt .tx{flex:1;min-width:0}
+.opt .tag{display:block;margin-top:4px;font-size:12px;font-weight:700}
+.opt.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.opt.sel .lt{border-color:#fff;background:#fff;color:var(--ink)}
+.opt.ok{background:var(--ink);color:#fff;border-color:var(--ink)}
+.opt.ok .lt{border-color:#fff;background:#fff;color:var(--ink)}
+.opt.bad{background:rgba(255,255,255,.9);border:2px dashed var(--ink)}
+.opt.bad .tx>span:first-child{text-decoration:line-through;text-decoration-thickness:1.5px}
+.opt.dim{opacity:.55}
+.opt[disabled]{cursor:default}
+.og{display:flex;flex-direction:column;gap:8px}
+.ex{margin:0 4px;border-radius:14px;padding:10px 14px;background:var(--glass-hi);border:1px solid var(--edge);display:flex;flex-direction:column;gap:3px;font-size:13px;line-height:1.5}
+.ex.ok{border:1.5px solid var(--ink)}
+.ex.bad{border:1.5px dashed var(--ink)}
+.ex b{display:flex;align-items:center;gap:6px;font-size:13px}
+.ex p{margin:0}
+.fb{border-radius:18px;padding:14px;background:var(--glass-hi);border:1px solid var(--edge);display:flex;flex-direction:column;gap:4px}
+.fb b{font-size:15px;display:flex;align-items:center;gap:8px}
+.fb p{margin:0;line-height:1.55}
+
+/* ujian */
+.timer{
+  margin-left:auto;background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;
+}
+.timer[data-low="1"]{background:#fff;color:var(--ink);text-decoration:underline}
+.chip-btn{position:relative;cursor:pointer;color:var(--ink)}
+.chip-btn::after{content:"";position:absolute;inset:-8px -4px}
+.ctl{display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:10px}
+.ctl .btn{padding:0;min-width:0}
+.btn-step{line-height:1}
+.btn-step svg{display:block;flex:none}
+.btn-ragu[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.nb{position:relative}
+.nb.ragu{background:#8C8C8C;border-color:#8C8C8C;color:#0A0A0A}
+.nb.ragu .l{color:#0A0A0A}
+.nb .n{font-size:15px}
+#overlay:empty{display:none}
+.ov{
+  position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+  padding:16px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px));
+  background:rgba(10,10,10,.38);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  animation:popupBackdropIn .2s ease-out both;
+}
+@keyframes popupBackdropIn{from{opacity:0}to{opacity:1}}
+@keyframes popupSheetIn{from{opacity:0;transform:translate3d(0,18px,0) scale(.975)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes popupSheetOut{from{opacity:1;transform:translate3d(0,0,0) scale(1)}to{opacity:0;transform:translate3d(0,10px,0) scale(.985)}}
+@keyframes popupBackdropOut{from{opacity:1}to{opacity:0}}
+.ov .sheet{animation:popupSheetIn .24s cubic-bezier(.2,.75,.25,1) both;transform-origin:center bottom}
+.ov.is-closing{pointer-events:none;animation:popupBackdropOut .17s ease-in both}
+.ov.is-closing .sheet{animation:popupSheetOut .17s ease-in both}
+.sheet{
+  width:100%;max-width:440px;max-height:calc(100% - 8px);overflow:auto;border-radius:24px;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  background:rgba(255,255,255,.9);border:1px solid var(--edge);box-shadow:0 24px 60px rgba(0,0,0,.28);
+}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.iconbtn{
+  width:40px;height:40px;border-radius:20px;border:1px solid var(--edge);background:var(--glass-hi);color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;border:1px solid rgba(0,0,0,.25);background:#fff;font-style:normal;font-weight:800;font-size:11px;color:var(--ink)}
+.lg-done{background:var(--ink);border-color:var(--ink);color:#fff}
+.lg-now{border:2.5px solid var(--ink)}
+.lg-ragu{background:#8C8C8C;border-color:#8C8C8C;color:#0A0A0A}
+.nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px}
+.nb{
+  min-height:54px;border-radius:14px;border:1px solid var(--edge);background:var(--glass-hi);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;padding:0;
+  font-variant-numeric:tabular-nums;
+}
+.nb .n{font-size:15px;font-weight:800}
+.nb .l{font-size:12px;font-weight:700;color:var(--ink-2)}
+.nb.done{background:var(--ink);border-color:var(--ink);color:#fff}
+.nb.done .l{color:#fff}
+.chip-ico{padding:0;width:36px;justify-content:center}
+.chip-ico svg{display:block}
+.cdisp{border-radius:18px;padding:12px 16px;background:rgba(255,255,255,.7);border:1px solid var(--edge);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:2px;min-height:84px;overflow:hidden}
+.cdisp .ce{font-size:13px;color:var(--ink-2);min-height:20px;max-width:100%;white-space:nowrap;overflow:hidden}
+.cdisp .cd{font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15;max-width:100%;white-space:nowrap;overflow:hidden}
+.ckeys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ck{height:52px;border-radius:16px;border:1px solid var(--edge);background:var(--glass-hi);color:var(--ink);font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0;touch-action:manipulation;box-shadow:0 4px 12px rgba(0,0,0,.05), inset 0 1px 0 rgba(255,255,255,.9)}
+.ck svg{display:block}
+.ck.fn{background:rgba(0,0,0,.08)}
+.ck.op{background:linear-gradient(180deg,var(--dark-1),var(--dark-2));color:#fff;border-color:rgba(255,255,255,.18)}
+.ck:active{transform:scale(.96)}
+.nb.bad{background:rgba(255,255,255,.9);border:2px dashed var(--ink)}
+.sheet-h h2.h2{font-size:19px}
+.nb.now{border:3px solid var(--ink);box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.nb.done.now{box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink)}
+.confirm{border-radius:18px;padding:14px;background:rgba(255,255,255,.9);border:2px solid var(--ink);display:flex;flex-direction:column;gap:10px}
+.confirm p{margin:0;line-height:1.5}
+ol.rules,ul.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;line-height:1.5}
+
+/* hasil */
+.score{font-size:64px;font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.score small{font-size:20px;font-weight:700;color:var(--ink-2);letter-spacing:0}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.two .glass{border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.two b{font-size:26px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.two span{font-size:12px;color:var(--ink-2)}
+
+/* riwayat */
+.hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.hist li{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:var(--glass-hi);border:1px solid var(--edge);
+}
+.hist .hn{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.hist .hn b{font-size:13px}
+.hist .hn span{font-size:12px;color:var(--ink-2)}
+.hist .nv{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+/* penguasaan */
+.mast,.qlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.mrow{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:18px;background:var(--glass-hi);border:1px solid var(--edge)}
+.mtop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.mt{font-weight:700;font-size:14px;line-height:1.35;min-width:0}
+.mbot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pill{
+  flex:none;display:inline-flex;align-items:center;min-height:24px;padding:0 10px;border-radius:12px;
+  font-size:11px;font-weight:700;white-space:nowrap;border:1.5px solid var(--ink);background:#fff;color:var(--ink);
+}
+.pill-kuasai{background:var(--ink);color:#fff}
+.pill-belum{border-style:dashed}
+.pill-data{border-color:rgba(0,0,0,.3);color:var(--ink-2);font-weight:600}
+.qlist li{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:18px;background:var(--glass-hi);border:1px solid var(--edge)}
+.qt{font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.qm{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+textarea{
+  width:100%;min-height:96px;resize:vertical;padding:12px;border-radius:16px;border:1px solid var(--edge);
+  background:rgba(255,255,255,.85);line-height:1.4;
+}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.filebtn:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.empty{margin:0;padding:18px 8px;text-align:center;color:var(--ink-2);line-height:1.5}
+
+/* grafik */
+.chart{display:block;width:100%;height:auto}
+.chart .gl{stroke:rgba(0,0,0,.10);stroke-width:1}
+.chart text{font-family:var(--font);font-size:10px;fill:var(--ink-2)}
+.chart .ln{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart .pt{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.chart .pe{fill:var(--ink);stroke:#fff;stroke-width:2}
+.chart .tip{fill:var(--ink)}
+.chart text.tipt{fill:#fff;font-weight:700;font-size:11px}
+
+/* navigasi bawah */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  padding-left:max(14px, env(safe-area-inset-left, 0px));
+  padding-right:max(14px, env(safe-area-inset-right, 0px));
+  padding-bottom:calc(14px + env(safe-area-inset-bottom, 0px));
+  pointer-events:none;
+}
+.dock-bar{
+  pointer-events:auto;max-width:520px;margin:0 auto;height:68px;padding:0 8px;border-radius:32px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(24px) saturate(130%);backdrop-filter:blur(24px) saturate(130%);
+  border:1px solid rgba(255,255,255,.85);
+  box-shadow:0 12px 32px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.95);
+}
+.dock button{
+  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:54px;margin:0 2px;padding:0;
+  border:0;border-radius:24px;background:transparent;color:var(--ink-2);font-size:11px;font-weight:600;
+}
+.dock button[aria-current="page"]{background:var(--ink);color:#fff;font-weight:700}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom, 0px));transform:translate(-50%,12px);z-index:30;
+  max-width:min(440px, calc(100vw - 32px));padding:12px 18px;border-radius:18px;background:var(--ink);color:#fff;
+  font-weight:600;font-size:13px;line-height:1.4;text-align:center;opacity:0;pointer-events:none;
+  transition:opacity .2s, transform .2s;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.wel{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+  padding:24px max(24px, env(safe-area-inset-right, 0px)) 24px max(24px, env(safe-area-inset-left, 0px))}
+.wel.fade{opacity:0;transition:opacity .25s ease}
+.wel-blur{position:absolute;inset:0;background:rgba(240,240,240,.42);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.wel-body{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;
+  animation:welIn .7s cubic-bezier(.22,1,.36,1) backwards;transition:opacity .35s ease, transform .35s ease}
+.wel-body.out{opacity:0;transform:scale(.96);pointer-events:none}
+.wel-t{margin:0;font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.wel-btn{min-height:56px;padding:0 36px;font-size:17px;border-radius:28px}
+@keyframes welIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes ldIn{from{opacity:0}to{opacity:1}}
+.ld .wel-blur{animation:ldIn .25s ease both}
+.ld-pct{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.ld-bar{width:min(240px,64vw);height:8px;border-radius:4px;background:var(--track);overflow:hidden}
+.ld-bar i{display:block;height:100%;width:100%;border-radius:4px;background:var(--ink);transform:scaleX(0);transform-origin:left;will-change:transform}
+.ld-lbl{font-size:14px;font-weight:600;color:var(--ink-2)}
+@media (max-width:360px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .score{font-size:52px}
+}
+
+/* Efek interaksi universal untuk seluruh tombol, termasuk navigasi dan tombol dinamis */
+:where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn){
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  cursor:pointer;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,filter .18s ease,background-color .18s ease;
+  transform-origin:center;
+}
+@media (hover:hover) and (pointer:fine){
+:where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn):not([disabled]):not([aria-disabled="true"]):hover{
+  filter:brightness(1.08);
+  box-shadow:0 0 0 1px rgba(255,255,255,.22),0 0 16px rgba(255,255,255,.16);
+}
+}
+:where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn):not([disabled]):not([aria-disabled="true"]):active,
+:where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn).ql-pressed{
+  transform:scale(.955);
+  filter:brightness(1.16);
+  box-shadow:0 0 0 2px rgba(255,255,255,.62),0 0 10px rgba(255,255,255,.42),0 0 24px rgba(255,255,255,.24);
+}
+:where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn):not([disabled]):not([aria-disabled="true"]):focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+@media (prefers-reduced-motion:reduce){
+  :where(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"], .btn, .back, .filebtn, .chip-btn){transition:none}
+}
+
+</style>
+<div class="bg" aria-hidden="true"></div>
+
+<div class="app">
+  <header class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></svg>
+    </div>
+    <div>
+      <div class="brand-name">QuizLearn</div>
+      <div class="brand-sub" id="mapel"></div>
+    </div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<nav class="dock" aria-label="Navigasi utama"><div class="dock-bar" id="dock"></div></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript>Website ini membutuhkan JavaScript. Aktifkan JavaScript di browser Anda.</noscript>
+<script>window.QL_CAN_DOWNLOAD = false;</script>
+<script>
+/*
+  DATA SOAL
+  Edit file ini untuk mengganti isi website. Tidak perlu mengubah file lain.
+
+  Aturan penulisan:
+  - "kunci" adalah nomor pilihan jawaban yang benar, dimulai dari 0
+    (0 = pilihan A, 1 = pilihan B, 2 = pilihan C, 3 = pilihan D).
+  - Setiap soal harus punya "id" yang berbeda.
+  - Setiap soal wajib punya tepat 4 pilihan.
+  - "jelas" adalah penjelasan jawaban yang benar. "jelasOpsi" (opsional) berisi 4 penjelasan,
+    satu per pilihan. Yang dipakai hanya penjelasan pilihan yang salah (isi pilihan benar boleh dikosongkan).
+  - Tanda kutip di dalam teks sebaiknya memakai tanda ' atau " yang diberi garis miring: \"
+*/
+window.QL_DATA = {
+  mapel: "Kewirausahaan di Era Digital",
+  kunciPenyimpanan: "kwdigital",   // kode singkat tanpa spasi; bedakan untuk tiap mata kuliah
+
+  pengaturan: {
+    ujianJumlahSoal: 60,   // jumlah soal dalam satu ujian (diambil acak dari semua bab)
+    ujianMenit: 60,        // durasi ujian dalam menit
+    penguasaan: {          // batas analisis di menu Progres (boleh dihapus untuk memakai nilai bawaan)
+      batasDikuasai: 80,   // persen benar minimal agar bab berstatus Dikuasai
+      batasCukup: 60,      // persen benar minimal agar bab berstatus Cukup
+      minJawabanBab: 5,    // jumlah jawaban minimal agar bab dinilai
+      minJawabanSoal: 2,   // soal dinilai setelah dijawab minimal sekian kali
+      batasSoalSalah: 50   // persen salah minimal agar soal masuk daftar "sering salah"
+    }
+  },
+
+  // Untuk menambah soal, tambahkan objek ke array "bab" dengan format berikut:
+  //
+  // bab: [
+  //   {
+  //     id: "bab1",
+  //     judul: "Bab 1. Judul Bab",
+  //     soal: [
+  //       {
+  //         id: "b1-1",
+  //         tanya: "Teks pertanyaan?",
+  //         opsi: ["Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"],
+  //         kunci: 1,
+  //         jelas: "Penjelasan mengapa jawaban yang benar itu benar.",
+  //         jelasOpsi: ["Mengapa A salah.", "", "Mengapa C salah.", "Mengapa D salah."]
+  //       }
+  //     ]
+  //   }
+  // ]
+  bab: [
+    {
+      "id": "bank-soal",
+      "judul": "Bank Soal MKWI4203",
+      "soal": [
+        {
+          "id": "q1",
+          "tanya": "Proses menciptakan nilai baru dengan mengombinasikan sumber daya untuk mengejar peluang merupakan definisi dari...",
+          "opsi": [
+            "Era Digital",
+            "Disrupsi Digital",
+            "Transformasi Digital",
+            "Kewirausahaan"
+          ],
+          "kunci": 3,
+          "jelas": "Definisi kewirausahaan menurut konsep dasarnya adalah proses menciptakan nilai baru melalui kombinasi sumber daya untuk mengejar peluang."
+        },
+        {
+          "id": "q2",
+          "tanya": "Periode yang ditandai oleh penggunaan teknologi digital secara masif yang mengubah cara produksi dan konsumsi disebut...",
+          "opsi": [
+            "Disrupsi Digital",
+            "Revolusi Industri",
+            "Era Digital",
+            "Transformasi Digital"
+          ],
+          "kunci": 2,
+          "jelas": "Era digital merujuk pada periode masifnya penggunaan teknologi digital yang mengubah cara produksi dan konsumsi secara fundamental."
+        },
+        {
+          "id": "q3",
+          "tanya": "Perubahan fundamental pada industri akibat inovasi teknologi digital yang menggantikan model bisnis lama dikenal sebagai...",
+          "opsi": [
+            "Era Digital",
+            "Transformasi Digital",
+            "Disrupsi Digital",
+            "Adaptasi Teknologi"
+          ],
+          "kunci": 2,
+          "jelas": "Disrupsi digital adalah perubahan fundamental yang menggantikan model bisnis lama akibat inovasi teknologi digital."
+        },
+        {
+          "id": "q4",
+          "tanya": "Integrasi teknologi digital ke dalam seluruh aspek usaha yang mengubah operasi dan nilai yang diberikan kepada pelanggan disebut...",
+          "opsi": [
+            "Era Digital",
+            "Transformasi Digital",
+            "Disrupsi Digital",
+            "Inovasi Terbuka"
+          ],
+          "kunci": 1,
+          "jelas": "Transformasi digital mencakup integrasi teknologi digital ke seluruh aspek usaha, mengubah operasi dan nilai bagi pelanggan."
+        },
+        {
+          "id": "q5",
+          "tanya": "Manakah pernyataan yang paling tepat membedakan disrupsi digital dan transformasi digital...",
+          "opsi": [
+            "Disrupsi hanya terjadi pada perusahaan rintisan",
+            "Keduanya memiliki makna yang identik",
+            "Transformasi menggantikan model lama, disrupsi mengintegrasikan teknologi",
+            "Disrupsi bersifat eksternal, transformasi bersifat internal"
+          ],
+          "kunci": 3,
+          "jelas": "Disrupsi digital merupakan tekanan perubahan eksternal yang menggantikan model bisnis lama, sementara transformasi digital adalah respons internal dengan mengintegrasikan teknologi ke dalam operasi usaha."
+        },
+        {
+          "id": "q6",
+          "tanya": "Berikut ini yang bukan merupakan ciri dari disrupsi digital adalah...",
+          "opsi": [
+            "Mengintegrasikan teknologi ke operasi yang sudah ada",
+            "Dipicu oleh inovasi teknologi",
+            "Menggantikan model bisnis lama",
+            "Menyebabkan perubahan fundamental pada industri"
+          ],
+          "kunci": 0,
+          "jelas": "Mengintegrasikan teknologi ke operasi yang sudah ada adalah ciri transformasi digital, bukan disrupsi digital yang justru menggantikan model bisnis lama."
+        },
+        {
+          "id": "q7",
+          "tanya": "Kondisi tercapainya tujuan usaha yang diukur dari keberlanjutan, profitabilitas, dan dampak positif merupakan pengertian dari...",
+          "opsi": [
+            "Inovasi Terbuka",
+            "Transformasi Digital",
+            "Adaptasi Teknologi",
+            "Keberhasilan Usaha"
+          ],
+          "kunci": 3,
+          "jelas": "Keberhasilan usaha diukur dari ketercapaian tujuan usaha, mencakup keberlanjutan, profitabilitas, dan dampak positif yang dihasilkan."
+        },
+        {
+          "id": "q8",
+          "tanya": "Alat dan sistem elektronik berbasis data biner yang digunakan untuk menciptakan, menyimpan, dan mempertukarkan informasi disebut...",
+          "opsi": [
+            "Platform Digital",
+            "Teknologi Digital",
+            "Transformasi Digital",
+            "Infrastruktur Digital"
+          ],
+          "kunci": 1,
+          "jelas": "Teknologi digital merujuk pada alat dan sistem elektronik berbasis data biner yang digunakan untuk menciptakan, menyimpan, dan mempertukarkan informasi."
+        },
+        {
+          "id": "q9",
+          "tanya": "Pendekatan inovasi di mana perusahaan secara sengaja memanfaatkan ide internal dan eksternal dikenal sebagai...",
+          "opsi": [
+            "Inovasi Terbuka",
+            "Transformasi Digital",
+            "Disrupsi Digital",
+            "Adaptasi Teknologi"
+          ],
+          "kunci": 0,
+          "jelas": "Inovasi terbuka adalah pendekatan yang dengan sengaja menggabungkan ide dari dalam dan luar perusahaan untuk mendorong kemajuan."
+        },
+        {
+          "id": "q10",
+          "tanya": "Kemampuan usaha untuk menyesuaikan proses dan model bisnisnya sejalan dengan perkembangan teknologi digital merupakan definisi dari...",
+          "opsi": [
+            "Adaptasi Teknologi",
+            "Transformasi Digital",
+            "Inovasi Terbuka",
+            "Disrupsi Digital"
+          ],
+          "kunci": 0,
+          "jelas": "Adaptasi teknologi menekankan pada kemampuan usaha menyesuaikan proses dan model bisnis mengikuti perkembangan teknologi digital."
+        },
+        {
+          "id": "q11",
+          "tanya": "Seorang wirausaha menjalankan bisnis berbasis aplikasi dan terus memperbarui fitur agar sesuai dengan tren teknologi terkini. Tindakan ini mencerminkan penerapan...",
+          "opsi": [
+            "Disrupsi Digital",
+            "Inovasi Terbuka",
+            "Adaptasi Teknologi",
+            "Transformasi Digital"
+          ],
+          "kunci": 2,
+          "jelas": "Memperbarui fitur sesuai tren teknologi menunjukkan kemampuan menyesuaikan proses bisnis, yang merupakan esensi adaptasi teknologi."
+        },
+        {
+          "id": "q12",
+          "tanya": "Mengapa inovasi terbuka menjadi kunci keberhasilan usaha di era digital...",
+          "opsi": [
+            "Mengurangi ketergantungan pada modal ventura",
+            "Menjamin produk langsung diterima pasar",
+            "Menghilangkan kebutuhan akan riset internal",
+            "Memungkinkan perusahaan memanfaatkan ide dari dalam dan luar secara bersamaan"
+          ],
+          "kunci": 3,
+          "jelas": "Inovasi terbuka mempercepat pengembangan solusi karena ide tidak hanya berasal dari internal, melainkan juga menyerap masukan eksternal secara sengaja."
+        },
+        {
+          "id": "q13",
+          "tanya": "Konsep yang menggambarkan individu yang bertindak berdasarkan keyakinan bahwa masa depan dapat diciptakan, bukan diprediksi, melalui tindakan yang diambilnya adalah...",
+          "opsi": [
+            "Efektuasi (Effectuation)",
+            "Kausalitas (Causation)",
+            "Lokus kendali internal (Internal Locus of Control)",
+            "Kesiapan beraksi (Action Readiness)"
+          ],
+          "kunci": 0,
+          "jelas": "Efektuasi adalah logika berpikir wirausaha di mana individu meyakini bahwa masa depan dibentuk oleh tindakan mereka sendiri, dimulai dari sarana yang dimiliki saat ini, bukan sekadar diprediksi berdasarkan analisis."
+        },
+        {
+          "id": "q14",
+          "tanya": "Bentuk wirausaha di mana individu mendirikan dan mengelola usahanya sendiri secara otonom disebut...",
+          "opsi": [
+            "Intrapreneur",
+            "Wirausaha Mandiri",
+            "Technopreneur",
+            "Wirausaha Sosial"
+          ],
+          "kunci": 1,
+          "jelas": "Wirausaha mandiri menjalankan dan mengelola usaha secara otonom tanpa bergantung pada organisasi yang sudah mapan."
+        },
+        {
+          "id": "q15",
+          "tanya": "Wirausaha yang mengandalkan inovasi teknologi sebagai inti dari model bisnis yang dijalankannya dikenal dengan istilah...",
+          "opsi": [
+            "Intrapreneur",
+            "Technopreneur",
+            "Wirausaha Mandiri",
+            "Wirausaha Digital"
+          ],
+          "kunci": 1,
+          "jelas": "Technopreneur menempatkan inovasi teknologi sebagai inti model bisnis yang dijalankan, membedakannya dari jenis wirausaha lain."
+        },
+        {
+          "id": "q16",
+          "tanya": "Seorang karyawan di perusahaan besar berhasil mengembangkan lini produk baru yang signifikan dengan memanfaatkan sumber daya perusahaan. Orang tersebut berperan sebagai...",
+          "opsi": [
+            "Wirausaha Mandiri",
+            "Technopreneur",
+            "Intrapreneur",
+            "Konsultan Bisnis"
+          ],
+          "kunci": 2,
+          "jelas": "Intrapreneur bertindak seperti wirausaha tetapi berinovasi di dalam organisasi yang sudah mapan, memanfaatkan sumber daya perusahaan untuk menciptakan nilai baru."
+        },
+        {
+          "id": "q17",
+          "tanya": "Perbedaan utama antara wirausaha mandiri dan intrapreneur terletak pada...",
+          "opsi": [
+            "Konteks organisasi tempat inovasi dilakukan",
+            "Tingkat kreativitas yang dimiliki",
+            "Jenis teknologi yang digunakan",
+            "Besaran modal awal yang dibutuhkan"
+          ],
+          "kunci": 0,
+          "jelas": "Wirausaha mandiri berinovasi secara otonom di luar organisasi mapan, sementara intrapreneur berinovasi di dalam organisasi yang sudah ada."
+        },
+        {
+          "id": "q18",
+          "tanya": "Individu yang bertindak seperti wirausaha namun berinovasi di dalam organisasi yang sudah mapan disebut...",
+          "opsi": [
+            "Wirausaha Mandiri",
+            "Technopreneur",
+            "Intrapreneur",
+            "Sosiopreneur"
+          ],
+          "kunci": 2,
+          "jelas": "Intrapreneur merupakan sebutan bagi individu yang menjalankan peran wirausaha di dalam perusahaan tempatnya bekerja, memanfaatkan sumber daya organisasi untuk berinovasi."
+        },
+        {
+          "id": "q19",
+          "tanya": "Keyakinan bahwa kesuksesan dan kegagalan ditentukan oleh kendali dan tindakan diri sendiri merupakan pengertian dari...",
+          "opsi": [
+            "Orientasi Peluang",
+            "Lokus Kendali Internal",
+            "Keberanian Mengambil Risiko",
+            "Efikasi Diri Kolektif"
+          ],
+          "kunci": 1,
+          "jelas": "Konsep Lokus Kendali Internal dari Julian Rotter menjelaskan bahwa individu meyakini hasil dari usahanya bergantung pada tindakan dirinya sendiri, bukan faktor eksternal."
+        },
+        {
+          "id": "q20",
+          "tanya": "Seorang wirausaha melihat kenaikan harga bahan baku bukan sebagai ancaman, melainkan peluang untuk menciptakan bahan alternatif yang lebih murah. Karakteristik kunci wirausaha yang paling menonjol dalam sikap tersebut adalah...",
+          "opsi": [
+            "Lokus Kendali Internal",
+            "Kreativitas dan Inovasi",
+            "Keberanian Mengambil Risiko",
+            "Orientasi Peluang"
+          ],
+          "kunci": 3,
+          "jelas": "Orientasi peluang adalah fokus mental untuk terus mencari dan memanfaatkan peluang baru dari setiap situasi, termasuk mengubah masalah menjadi kesempatan bisnis."
+        },
+        {
+          "id": "q21",
+          "tanya": "Kecenderungan untuk memilih tindakan yang memiliki potensi keberhasilan atau kegagalan yang telah diperhitungkan sebelumnya merupakan karakteristik...",
+          "opsi": [
+            "Lokus Kendali Internal",
+            "Orientasi Peluang",
+            "Keberanian Mengambil Risiko",
+            "Kreativitas dan Inovasi"
+          ],
+          "kunci": 2,
+          "jelas": "Keberanian mengambil risiko bukan berarti nekat, melainkan berani memilih tindakan setelah memperhitungkan secara matang potensi untung dan ruginya."
+        },
+        {
+          "id": "q22",
+          "tanya": "Kemampuan menghasilkan gagasan baru dan menerapkannya menjadi solusi atau produk yang bernilai merupakan perpaduan dari...",
+          "opsi": [
+            "Kreativitas dan Inovasi",
+            "Orientasi Peluang dan Keberanian",
+            "Lokus Kendali dan Kreativitas",
+            "Inovasi dan Keberanian Risiko"
+          ],
+          "kunci": 0,
+          "jelas": "Kreativitas adalah menghasilkan gagasan baru, sedangkan inovasi adalah menerapkan gagasan tersebut menjadi produk atau solusi bernilai. Keduanya saling melengkapi sebagai karakteristik kunci wirausaha."
+        },
+        {
+          "id": "q23",
+          "tanya": "Berikut ini yang bukan termasuk karakteristik kunci wirausaha adalah...",
+          "opsi": [
+            "Lokus Kendali Internal",
+            "Orientasi Peluang",
+            "Keberanian Mengambil Risiko",
+            "Lokus Kendali Eksternal"
+          ],
+          "kunci": 3,
+          "jelas": "Lokus kendali eksternal justru berlawanan dengan karakteristik wirausaha, karena menempatkan keberhasilan pada faktor di luar diri individu, bukan pada tindakannya sendiri."
+        },
+        {
+          "id": "q24",
+          "tanya": "Mengapa kreativitas tanpa inovasi belum cukup untuk keberhasilan wirausaha...",
+          "opsi": [
+            "Kreativitas hanya menghasilkan ide tanpa nilai ekonomi",
+            "Kreativitas memerlukan keberanian mengambil risiko",
+            "Inovasi menggantikan kebutuhan akan kreativitas",
+            "Inovasi hanya berlaku di sektor teknologi"
+          ],
+          "kunci": 0,
+          "jelas": "Kreativitas berhenti pada tataran ide, sementara wirausaha memerlukan inovasi untuk menerjemahkan ide tersebut menjadi produk atau solusi yang memiliki nilai ekonomi dan dapat dipasarkan."
+        },
+        {
+          "id": "q25",
+          "tanya": "Metode evaluasi diri untuk mengidentifikasi Kekuatan, Kelemahan, Peluang, dan Ancaman individu dalam konteks usaha dikenal sebagai...",
+          "opsi": [
+            "Analisis Kesenjangan Kompetensi",
+            "Value Proposition Canvas",
+            "Analisis SWOT Pribadi",
+            "Business Model Canvas"
+          ],
+          "kunci": 2,
+          "jelas": "Analisis SWOT Pribadi mengadaptasi kerangka SWOT untuk mengevaluasi potensi diri individu secara internal (Kekuatan dan Kelemahan) dan eksternal (Peluang dan Ancaman)."
+        },
+        {
+          "id": "q26",
+          "tanya": "Proses membandingkan kompetensi yang dimiliki saat ini dengan kompetensi yang dibutuhkan untuk berhasil dalam usaha merupakan pengertian dari...",
+          "opsi": [
+            "Analisis SWOT Pribadi",
+            "Analisis Kesenjangan Kompetensi",
+            "Identifikasi Minat dan Gairah",
+            "Prinsip Bird-in-Hand"
+          ],
+          "kunci": 1,
+          "jelas": "Analisis kesenjangan kompetensi membantu individu memetakan jarak antara kemampuan aktual yang dimiliki dan standar kompetensi yang diperlukan untuk menjalankan usaha tertentu."
+        },
+        {
+          "id": "q27",
+          "tanya": "Dorongan internal berupa ketertarikan mendalam pada suatu bidang yang menjadi sumber energi dan ketekunan dalam berwirausaha disebut...",
+          "opsi": [
+            "Lokus Kendali Internal",
+            "Orientasi Peluang",
+            "Potensi Diri",
+            "Minat dan Gairah"
+          ],
+          "kunci": 3,
+          "jelas": "Minat dan gairah merupakan dorongan internal yang membuat wirausaha tetap tekun dan bersemangat menjalani usahanya meskipun menghadapi rintangan."
+        },
+        {
+          "id": "q28",
+          "tanya": "Keseluruhan kapasitas dan bakat yang dimiliki individu yang dapat dikembangkan untuk mencapai tujuan usaha dikenal dengan istilah...",
+          "opsi": [
+            "Potensi Diri",
+            "Kompetensi Inti",
+            "Keunggulan Kompetitif",
+            "Minat dan Gairah"
+          ],
+          "kunci": 0,
+          "jelas": "Potensi diri mencakup seluruh kapasitas, bakat, dan kemampuan yang dapat dikembangkan individu sebagai modal dasar dalam memulai dan menjalankan usaha."
+        },
+        {
+          "id": "q29",
+          "tanya": "Berikut ini yang bukan merupakan komponen dalam analisis SWOT Pribadi adalah...",
+          "opsi": [
+            "Kekuatan",
+            "Kelemahan",
+            "Segmentasi",
+            "Ancaman"
+          ],
+          "kunci": 2,
+          "jelas": "SWOT terdiri dari Strengths (Kekuatan), Weaknesses (Kelemahan), Opportunities (Peluang), dan Threats (Ancaman). Segmentasi bukan bagian dari kerangka SWOT Pribadi."
+        },
+        {
+          "id": "q30",
+          "tanya": "Seorang calon wirausaha menyadari bahwa ia ahli dalam desain grafis tetapi kurang menguasai manajemen keuangan, sementara di kotanya banyak UMKM yang membutuhkan jasa desain. Evaluasi diri yang paling tepat ia gunakan adalah...",
+          "opsi": [
+            "Analisis Kesenjangan Kompetensi",
+            "Analisis SWOT Pribadi",
+            "Prinsip Effectuation",
+            "Value Proposition Canvas"
+          ],
+          "kunci": 1,
+          "jelas": "Analisis SWOT Pribadi tepat karena ia mengevaluasi faktor internal berupa kekuatan (ahli desain) dan kelemahan (kurang manajemen keuangan), serta faktor eksternal berupa peluang (banyak UMKM butuh jasa desain)."
+        },
+        {
+          "id": "q31",
+          "tanya": "Logika berpikir wirausaha yang dimulai dengan sarana yang dimiliki untuk menciptakan berbagai kemungkinan hasil dikenal dengan konsep...",
+          "opsi": [
+            "Kausalitas",
+            "Design Thinking",
+            "Effectuation",
+            "Blue Ocean Strategy"
+          ],
+          "kunci": 2,
+          "jelas": "Effectuation, yang dikembangkan oleh Saras Sarasvathy, adalah logika berpikir wirausaha yang dimulai dari sarana yang dimiliki untuk menciptakan berbagai hasil yang mungkin, berbeda dengan logika manajerial."
+        },
+        {
+          "id": "q32",
+          "tanya": "Prinsip yang mendorong wirausaha untuk memulai usaha berdasarkan siapa dirimu, apa yang kau tahu, dan siapa yang kau kenal merupakan prinsip...",
+          "opsi": [
+            "Rugi yang Terjangkau",
+            "Bird-in-Hand",
+            "Kausalitas",
+            "Inovasi Nilai"
+          ],
+          "kunci": 1,
+          "jelas": "Prinsip Bird-in-Hand menekankan bahwa wirausaha sebaiknya memulai dari apa yang sudah dimiliki, yaitu identitas diri, pengetahuan, dan jaringan, bukan dari tujuan yang abstrak."
+        },
+        {
+          "id": "q33",
+          "tanya": "Logika berpikir manajerial yang dimulai dengan tujuan yang telah ditentukan untuk mencari sarana yang optimal disebut...",
+          "opsi": [
+            "Effectuation",
+            "Design Thinking",
+            "Kausalitas",
+            "Prinsip Bird-in-Hand"
+          ],
+          "kunci": 2,
+          "jelas": "Kausalitas adalah logika manajerial yang bekerja sebaliknya dari effectuation, dimulai dari penetapan tujuan terlebih dahulu, baru kemudian mencari dan mengoptimalkan sarana untuk mencapainya."
+        },
+        {
+          "id": "q34",
+          "tanya": "Prinsip membatasi risiko dengan hanya menginvestasikan sumber daya yang siap untuk dilepaskan dalam menjalankan usaha dikenal sebagai...",
+          "opsi": [
+            "Prinsip Bird-in-Hand",
+            "Prinsip Rugi yang Terjangkau",
+            "Prinsip Kausalitas",
+            "Prinsip Inovasi Nilai"
+          ],
+          "kunci": 1,
+          "jelas": "Prinsip Rugi yang Terjangkau mengajarkan wirausaha untuk hanya menginvestasikan sumber daya yang siap dilepaskan jika gagal, sehingga kegagalan tidak berdampak fatal pada kehidupan pribadi."
+        },
+        {
+          "id": "q35",
+          "tanya": "Prinsip effectuation yang mendorong wirausaha untuk membentuk kemitraan dan komitmen dengan pihak-pihak yang bersedia terlibat sejak awal untuk mengurangi ketidakpastian dikenal sebagai...",
+          "opsi": [
+            "Crazy Quilt",
+            "Pilot in the Plane",
+            "Bird in Hand",
+            "Affordable Loss"
+          ],
+          "kunci": 0,
+          "jelas": "Prinsip Crazy Quilt menekankan pentingnya membangun jaringan kemitraan dan komitmen dari para pemangku kepentingan yang bersedia bergabung dalam usaha. Setiap mitra baru membawa sumber daya dan perspektif baru yang secara kolektif membentuk arah usaha dan mengurangi ketidakpastian, seperti menyatukan potongan-potongan kain yang berbeda menjadi satu selimut yang utuh."
+        },
+        {
+          "id": "q36",
+          "tanya": "Dalam logika effectuation, seorang wirausaha menentukan batas maksimal investasi yang siap ia hilangkan sebelum memulai usaha. Tindakan ini menerapkan...",
+          "opsi": [
+            "Prinsip Rugi yang Terjangkau",
+            "Prinsip Bird-in-Hand",
+            "Prinsip Kemitraan Strategis",
+            "Prinsip Eksploitasi Peluang"
+          ],
+          "kunci": 0,
+          "jelas": "Prinsip Affordable Loss atau Rugi yang Terjangkau mengajarkan wirausaha untuk membatasi risiko dengan hanya menginvestasikan sumber daya yang benar-benar siap dilepaskan jika usaha gagal."
+        },
+        {
+          "id": "q37",
+          "tanya": "Istilah yang digunakan Eric Ries untuk menggambarkan versi paling sederhana dari produk yang tetap memiliki fitur inti untuk diuji ke pengguna awal adalah...",
+          "opsi": [
+            "Produk Minimum Layak",
+            "Produk Akhir Minimal",
+            "Purwarupa Fungsional",
+            "Konsep Validasi Awal"
+          ],
+          "kunci": 0,
+          "jelas": "Eric Ries memperkenalkan Minimum Viable Product (MVP) sebagai versi produk dengan fitur minimal yang cukup untuk diuji oleh pengguna awal dan memberikan umpan balik bagi pengembangan selanjutnya."
+        },
+        {
+          "id": "q38",
+          "tanya": "Pergantian strategi usaha yang dilakukan secara terstruktur berdasarkan hasil validasi dan umpan balik pasar disebut...",
+          "opsi": [
+            "Iterasi Produk",
+            "Diversifikasi",
+            "Rebranding",
+            "Pivot"
+          ],
+          "kunci": 3,
+          "jelas": "Eric Ries mendefinisikan pivot sebagai perubahan strategi yang terstruktur dan berdasarkan pembelajaran dari umpan balik pasar, berbeda dengan iterasi yang hanya penyempurnaan tanpa perubahan arah strategi."
+        },
+        {
+          "id": "q39",
+          "tanya": "Sebelum membangun produk secara penuh, seorang wirausaha digital menguji asumsi inti dari idenya dengan mewawancarai 50 calon pelanggan untuk memperoleh bukti nyata. Tahapan yang sedang ia jalani adalah...",
+          "opsi": [
+            "Identifikasi Peluang",
+            "Segmentasi Pasar",
+            "Peluncuran Lunak",
+            "Validasi Ide"
+          ],
+          "kunci": 3,
+          "jelas": "Validasi ide merupakan tahap menguji asumsi inti dengan bukti nyata dari calon pelanggan sebelum mengeluarkan sumber daya besar untuk membangun produk secara penuh."
+        },
+        {
+          "id": "q40",
+          "tanya": "Berikut ini yang bukan merupakan tahapan dalam memulai aktivitas kewirausahaan di era digital adalah...",
+          "opsi": [
+            "Identifikasi Peluang",
+            "Penetapan Harga Kompetitif",
+            "Pengembangan Produk Minimum Layak",
+            "Validasi Ide"
+          ],
+          "kunci": 1,
+          "jelas": "Penetapan harga kompetitif merupakan bagian dari strategi pemasaran setelah produk siap diluncurkan, bukan termasuk tahapan awal yang terdiri dari identifikasi peluang, validasi ide, dan pengembangan MVP."
+        },
+        {
+          "id": "q41",
+          "tanya": "Proses menemukan kebutuhan pasar yang belum terpenuhi atau masalah yang bisa diatasi dengan solusi baru merupakan pengertian dari...",
+          "opsi": [
+            "Identifikasi Peluang",
+            "Segmentasi Pasar",
+            "Analisis SWOT",
+            "Penetapan Posisi"
+          ],
+          "kunci": 0,
+          "jelas": "Identifikasi peluang adalah langkah pertama dalam aktivitas kewirausahaan di mana wirausaha mencari kebutuhan pasar yang belum terlayani atau masalah yang menunggu solusi inovatif."
+        },
+        {
+          "id": "q42",
+          "tanya": "Mengapa wirausaha digital perlu mengembangkan Produk Minimum Layak sebelum produk versi penuh...",
+          "opsi": [
+            "Agar produk langsung menghasilkan pendapatan maksimal",
+            "Untuk menghemat biaya pengujian dengan membangun produk seadanya",
+            "Karena investor hanya bersedia mendanai produk yang sudah memiliki fitur lengkap",
+            "Untuk menguji asumsi inti produk dengan pengguna awal dan memperoleh umpan balik valid"
+          ],
+          "kunci": 3,
+          "jelas": "MVP memungkinkan wirausaha menguji apakah asumsi inti tentang kebutuhan pelanggan benar, sebelum menginvestasikan banyak sumber daya ke fitur yang mungkin tidak diperlukan pasar."
+        },
+        {
+          "id": "q43",
+          "tanya": "Pendekatan pemecahan masalah yang berpusat pada manusia dan dilakukan melalui proses iteratif untuk menghasilkan solusi inovatif disebut...",
+          "opsi": [
+            "Lean Startup",
+            "Blue Ocean Strategy",
+            "Effectuation",
+            "Design Thinking"
+          ],
+          "kunci": 3,
+          "jelas": "Tim Brown mempopulerkan Design Thinking sebagai pendekatan yang menempatkan manusia sebagai pusat proses pemecahan masalah melalui tahapan iteratif seperti empati, definisi, ideasi, dan prototipe."
+        },
+        {
+          "id": "q44",
+          "tanya": "Dalam Design Thinking, tahap mendalam untuk memahami kebutuhan, perasaan, dan konteks pengguna melalui observasi dan wawancara disebut...",
+          "opsi": [
+            "Definisi",
+            "Ideasi",
+            "Empati",
+            "Prototipe"
+          ],
+          "kunci": 2,
+          "jelas": "Tahap empati merupakan fondasi Design Thinking, di mana perancang berusaha memahami pengguna secara mendalam melalui observasi langsung dan wawancara tanpa langsung menawarkan solusi."
+        },
+        {
+          "id": "q45",
+          "tanya": "Setelah melakukan wawancara mendalam dengan puluhan pengguna, tim perancang mensintesis temuan-temuan kunci menjadi satu pernyataan masalah yang jelas dan berfokus pada pengguna. Tim tersebut sedang menjalankan tahap...",
+          "opsi": [
+            "Empati",
+            "Ideasi",
+            "Definisi Masalah",
+            "Pengujian"
+          ],
+          "kunci": 2,
+          "jelas": "Tahap Define atau Definisi Masalah adalah momen mensintesis seluruh temuan dari fase empati menjadi pernyataan masalah yang fokus, jelas, dan dapat ditindaklanjuti dalam proses desain."
+        },
+        {
+          "id": "q46",
+          "tanya": "Berikut ini yang bukan termasuk tahapan dalam proses Design Thinking adalah...",
+          "opsi": [
+            "Empati",
+            "Segmentasi",
+            "Ideasi",
+            "Prototipe"
+          ],
+          "kunci": 1,
+          "jelas": "Segmentasi merupakan konsep dari pemasaran untuk membagi pasar, sedangkan Design Thinking terdiri dari tahap empati, definisi, ideasi, prototipe, dan pengujian."
+        },
+        {
+          "id": "q47",
+          "tanya": "Tahap Design Thinking di mana tim menghasilkan sebanyak mungkin gagasan kreatif tanpa melakukan penilaian atau kritik disebut...",
+          "opsi": [
+            "Ideasi",
+            "Definisi",
+            "Empati",
+            "Prototipe"
+          ],
+          "kunci": 0,
+          "jelas": "Ideasi adalah tahap brainstorming di mana kuantitas gagasan lebih diutamakan, dan penilaian atau kritik ditunda agar kreativitas dapat mengalir dengan bebas tanpa hambatan psikologis."
+        },
+        {
+          "id": "q48",
+          "tanya": "Untuk menguji gagasan solusi dengan cepat dan murah, tim Design Thinking mewujudkan ide terpilih menjadi artefak sederhana dari kertas dan karton. Tim tersebut sedang menjalankan tahap...",
+          "opsi": [
+            "Empati",
+            "Ideasi",
+            "Prototipe",
+            "Implementasi"
+          ],
+          "kunci": 2,
+          "jelas": "Prototipe adalah representasi sederhana dan murah dari ide solusi yang memungkinkan tim menguji asumsi desain dengan pengguna secara cepat sebelum mengeluarkan biaya pengembangan besar."
+        },
+        {
+          "id": "q49",
+          "tanya": "Representasi semi-fiksi dari pelanggan ideal yang dibangun berdasarkan riset pasar dan data nyata tentang pelanggan yang ada disebut...",
+          "opsi": [
+            "Segmen Pelanggan",
+            "Persona Pembeli",
+            "Profil Demografis",
+            "Target Pasar"
+          ],
+          "kunci": 1,
+          "jelas": "Persona pembeli adalah profil semi-fiksi yang merepresentasikan pelanggan ideal, disusun dari data riset dan pelanggan nyata, sehingga membantu tim memahami kepada siapa mereka merancang solusi."
+        },
+        {
+          "id": "q50",
+          "tanya": "Pergeseran kekuatan dari produsen ke konsumen yang terjadi karena akses informasi dan opini yang luas di platform digital dikenal sebagai...",
+          "opsi": [
+            "Disrupsi Digital",
+            "Transformasi Digital",
+            "Empowerment Konsumen",
+            "Demokratisasi Pasar"
+          ],
+          "kunci": 2,
+          "jelas": "Empowerment konsumen menggambarkan fenomena di mana konsumen memiliki daya tawar lebih tinggi karena dapat mengakses informasi produk, membandingkan harga, dan membaca ulasan secara luas sebelum membeli."
+        },
+        {
+          "id": "q51",
+          "tanya": "Seorang pemilik usaha online mengamati bahwa pelanggannya selalu membaca ulasan produk, membandingkan harga di beberapa platform, dan menanyakan stok melalui media sosial sebelum membeli. Pola tindakan ini mencerminkan...",
+          "opsi": [
+            "Perilaku Konsumen Digital",
+            "Segmentasi Perilaku",
+            "Loyalitas Merek",
+            "Efisiensi Transaksi"
+          ],
+          "kunci": 0,
+          "jelas": "Perilaku konsumen digital mencakup pola mencari, memilih, membeli, dan mengevaluasi produk melalui saluran digital, seperti membaca ulasan dan membandingkan harga secara online sebelum keputusan pembelian."
+        },
+        {
+          "id": "q52",
+          "tanya": "Pola tindakan individu saat mencari, memilih, membeli, dan mengevaluasi produk melalui saluran digital merupakan pengertian dari...",
+          "opsi": [
+            "Perilaku konsumen digital",
+            "Empowerment konsumen",
+            "Persona pembeli",
+            "Konsumen yang selalu terhubung"
+          ],
+          "kunci": 0,
+          "jelas": "Perilaku konsumen digital secara spesifik merujuk pada pola tindakan individu dalam proses pencarian hingga evaluasi produk melalui saluran digital, berbeda dengan empowerment yang menekankan pergeseran kekuatan atau persona yang merupakan representasi pelanggan ideal."
+        },
+        {
+          "id": "q53",
+          "tanya": "Konsumen yang mengandalkan konektivitas internet untuk memperoleh informasi dan berinteraksi secara real-time dikenal dengan istilah...",
+          "opsi": [
+            "Persona pembeli",
+            "Konsumen yang selalu terhubung",
+            "Konsumen digital pasif",
+            "Konsumen tersegmentasi"
+          ],
+          "kunci": 1,
+          "jelas": "Konsumen yang selalu terhubung dicirikan oleh ketergantungannya pada konektivitas internet untuk mengakses informasi dan berinteraksi secara real-time, menjadi karakteristik utama konsumen di era digital."
+        },
+        {
+          "id": "q54",
+          "tanya": "Berikut ini yang bukan merupakan karakteristik konsumen di era digital adalah...",
+          "opsi": [
+            "Ketergantungan penuh pada iklan televisi",
+            "Memiliki akses informasi yang luas",
+            "Selalu terhubung dengan internet",
+            "Memberdayakan diri melalui opini di platform digital"
+          ],
+          "kunci": 0,
+          "jelas": "Ketergantungan penuh pada iklan televisi merupakan karakteristik konsumen era tradisional, bukan era digital di mana konsumen aktif mencari informasi melalui berbagai saluran digital dan platform online."
+        },
+        {
+          "id": "q55",
+          "tanya": "Proses membagi pasar yang heterogen menjadi kelompok konsumen yang lebih kecil dan homogen berdasarkan kriteria tertentu disebut...",
+          "opsi": [
+            "Value proposition canvas",
+            "Segmentasi pasar",
+            "Penetapan posisi",
+            "Persona pembeli"
+          ],
+          "kunci": 1,
+          "jelas": "Segmentasi pasar adalah proses pengelompokan pasar heterogen menjadi kelompok-kelompok homogen berdasarkan kriteria seperti demografi, psikografi, geografi, atau perilaku agar strategi pemasaran lebih terarah."
+        },
+        {
+          "id": "q56",
+          "tanya": "Value Proposition Canvas dirancang untuk memastikan keselarasan antara...",
+          "opsi": [
+            "Harga produk dan daya beli konsumen",
+            "Saluran pemasaran dengan strategi promosi",
+            "Proposisi nilai produk dengan profil dan kebutuhan pelanggan",
+            "Biaya produksi dan margin keuntungan"
+          ],
+          "kunci": 2,
+          "jelas": "Value Proposition Canvas adalah alat yang dikembangkan Alexander Osterwalder untuk memastikan bahwa proposisi nilai suatu produk selaras dengan profil pelanggan, mencakup tugas, pemicu penderitaan, dan pemicu keuntungan pelanggan."
+        },
+        {
+          "id": "q57",
+          "tanya": "Dalam Value Proposition Canvas, hal-hal yang pelanggan coba selesaikan dalam kehidupan atau pekerjaan mereka disebut...",
+          "opsi": [
+            "Customer jobs",
+            "Gains",
+            "Pains",
+            "Value propositions"
+          ],
+          "kunci": 0,
+          "jelas": "Customer jobs atau tugas pelanggan mencakup tugas fungsional, sosial, dan emosional yang ingin diselesaikan pelanggan. Konsep ini berbeda dengan pains yang merupakan hambatan dan gains yang merupakan manfaat yang diinginkan."
+        },
+        {
+          "id": "q58",
+          "tanya": "Hasil, risiko, dan hambatan negatif yang dialami pelanggan sebelum, selama, atau setelah menyelesaikan suatu tugas dalam Value Proposition Canvas dikenal sebagai...",
+          "opsi": [
+            "Pain relievers",
+            "Gains",
+            "Customer jobs",
+            "Pains"
+          ],
+          "kunci": 3,
+          "jelas": "Pains adalah elemen negatif berupa hambatan, risiko, atau hasil buruk yang dialami pelanggan. Gains sebaliknya adalah manfaat positif, sementara customer jobs adalah tugas yang ingin diselesaikan pelanggan."
+        },
+        {
+          "id": "q59",
+          "tanya": "Perbedaan utama antara Pains dan Gains dalam Value Proposition Canvas terletak pada...",
+          "opsi": [
+            "Pains bersifat positif sedangkan Gains bersifat negatif",
+            "Pains hanya terjadi sebelum pembelian, Gains hanya setelah pembelian",
+            "Pains adalah hambatan dan risiko, sedangkan Gains adalah manfaat yang diinginkan pelanggan",
+            "Pains dan Gains sama-sama merupakan tugas pelanggan"
+          ],
+          "kunci": 2,
+          "jelas": "Pains merepresentasikan hambatan, risiko, dan hasil negatif yang dialami pelanggan, sedangkan Gains merupakan manfaat dan hasil positif yang diinginkan, diharapkan, atau akan mengejutkan pelanggan."
+        },
+        {
+          "id": "q60",
+          "tanya": "Hasil dan manfaat positif yang diinginkan, diharapkan, atau akan mengejutkan pelanggan dalam kerangka Value Proposition Canvas merupakan pengertian dari...",
+          "opsi": [
+            "Gains",
+            "Customer jobs",
+            "Pains",
+            "Pain relievers"
+          ],
+          "kunci": 0,
+          "jelas": "Gains adalah elemen positif dalam Value Proposition Canvas yang mencakup hasil dan manfaat yang diinginkan pelanggan, baik yang diharapkan secara eksplisit maupun yang bersifat mengejutkan sebagai nilai tambah."
+        },
+        {
+          "id": "q61",
+          "tanya": "Model bisnis yang memfasilitasi interaksi antara dua atau lebih kelompok pengguna yang berbeda namun saling bergantung disebut...",
+          "opsi": [
+            "Model bisnis berlangganan",
+            "Model bisnis tradisional",
+            "Model bisnis freemium",
+            "Model bisnis platform"
+          ],
+          "kunci": 3,
+          "jelas": "Model bisnis platform menciptakan nilai dengan memfasilitasi interaksi antar kelompok pengguna yang saling bergantung, seperti marketplace yang menghubungkan penjual dan pembeli atau aplikasi ride-hailing yang menghubungkan pengemudi dan penumpang."
+        },
+        {
+          "id": "q62",
+          "tanya": "Model bisnis di mana pelanggan membayar biaya periodik untuk mendapatkan akses berkelanjutan ke produk atau layanan merupakan karakteristik dari...",
+          "opsi": [
+            "Model bisnis platform",
+            "Model bisnis transaksional",
+            "Model bisnis freemium",
+            "Model bisnis berlangganan"
+          ],
+          "kunci": 3,
+          "jelas": "Model bisnis berlangganan mengandalkan pembayaran periodik dari pelanggan untuk akses berkelanjutan, seperti layanan streaming atau SaaS, berbeda dengan freemium yang menggabungkan layanan gratis dan berbayar."
+        },
+        {
+          "id": "q63",
+          "tanya": "Freemium adalah model bisnis yang menawarkan...",
+          "opsi": [
+            "Semua fitur premium secara gratis tanpa batasan",
+            "Layanan dasar gratis sementara fitur premium dikenakan biaya",
+            "Pembayaran satu kali untuk akses seumur hidup",
+            "Diskon besar-besaran pada periode tertentu"
+          ],
+          "kunci": 1,
+          "jelas": "Freemium menggabungkan kata 'free' dan 'premium', di mana layanan dasar diberikan secara gratis untuk menarik pengguna, sementara fitur-fitur lanjutan atau premium ditawarkan dengan biaya tertentu."
+        },
+        {
+          "id": "q64",
+          "tanya": "Manakah pernyataan berikut yang paling tepat membedakan model bisnis platform dan model bisnis berlangganan...",
+          "opsi": [
+            "Platform selalu gratis sedangkan berlangganan selalu berbayar",
+            "Platform memfasilitasi interaksi antar kelompok pengguna, sedangkan berlangganan mengandalkan pembayaran periodik untuk akses",
+            "Platform hanya untuk bisnis digital, berlangganan untuk bisnis konvensional",
+            "Keduanya tidak memiliki perbedaan signifikan dalam sumber pendapatan"
+          ],
+          "kunci": 1,
+          "jelas": "Perbedaan mendasar terletak pada mekanisme penciptaan nilai: platform menghubungkan kelompok pengguna berbeda yang saling bergantung, sedangkan model berlangganan berfokus pada pembayaran periodik untuk akses berkelanjutan."
+        },
+        {
+          "id": "q65",
+          "tanya": "Kerangka kerja yang menjelaskan bagaimana suatu organisasi menciptakan, menyampaikan, dan menangkap nilai disebut...",
+          "opsi": [
+            "Business Model Canvas",
+            "Value Proposition Canvas",
+            "Model bisnis",
+            "Blue Ocean Strategy"
+          ],
+          "kunci": 2,
+          "jelas": "Model bisnis adalah kerangka kerja fundamental yang menjelaskan logika organisasi dalam menciptakan, menyampaikan, dan menangkap nilai. Business Model Canvas adalah alat untuk memvisualisasikan model bisnis, bukan definisi model bisnis itu sendiri."
+        },
+        {
+          "id": "q66",
+          "tanya": "Dalam Business Model Canvas, blok yang mendefinisikan kelompok orang atau organisasi berbeda yang ingin dijangkau dan dilayani oleh perusahaan adalah...",
+          "opsi": [
+            "Proposisi nilai",
+            "Arus pendapatan",
+            "Hubungan pelanggan",
+            "Segmen pelanggan"
+          ],
+          "kunci": 3,
+          "jelas": "Segmen pelanggan adalah blok yang mengidentifikasi kelompok-kelompok berbeda yang menjadi target layanan perusahaan. Tanpa segmen pelanggan yang jelas, perusahaan tidak dapat merancang proposisi nilai yang tepat."
+        },
+        {
+          "id": "q67",
+          "tanya": "Blok dalam Business Model Canvas yang merepresentasikan uang yang dihasilkan perusahaan dari setiap segmen pelanggan yang telah dilayani disebut...",
+          "opsi": [
+            "Proposisi nilai",
+            "Struktur biaya",
+            "Arus pendapatan",
+            "Segmen pelanggan"
+          ],
+          "kunci": 2,
+          "jelas": "Arus pendapatan menggambarkan bagaimana perusahaan menghasilkan uang dari setiap segmen pelanggan, mencakup berbagai mekanisme seperti penjualan aset, biaya penggunaan, biaya berlangganan, atau lisensi."
+        },
+        {
+          "id": "q68",
+          "tanya": "Perbedaan utama antara Proposisi Nilai dan Arus Pendapatan dalam Business Model Canvas adalah...",
+          "opsi": [
+            "Proposisi Nilai menjelaskan nilai yang diciptakan untuk pelanggan, sedangkan Arus Pendapatan menjelaskan bagaimana nilai tersebut menghasilkan uang",
+            "Keduanya sama-sama menjelaskan sumber pendapatan perusahaan",
+            "Proposisi Nilai selalu berbentuk fisik, Arus Pendapatan selalu berbentuk digital",
+            "Tidak ada perbedaan karena keduanya saling menggantikan"
+          ],
+          "kunci": 0,
+          "jelas": "Proposisi Nilai berfokus pada nilai yang diberikan kepada pelanggan melalui produk atau layanan, sementara Arus Pendapatan menjelaskan mekanisme bagaimana perusahaan mengonversi nilai tersebut menjadi pendapatan aktual."
+        },
+        {
+          "id": "q69",
+          "tanya": "Semua biaya yang dikeluarkan untuk mengoperasikan model bisnis tertentu dalam Business Model Canvas disebut...",
+          "opsi": [
+            "Struktur Biaya",
+            "Arus Pendapatan",
+            "Proposisi Nilai",
+            "Segmen Pelanggan"
+          ],
+          "kunci": 0,
+          "jelas": "Struktur biaya mencakup seluruh pengeluaran yang timbul dari operasional model bisnis, berbeda dengan arus pendapatan yang mencatat pemasukan."
+        },
+        {
+          "id": "q70",
+          "tanya": "Blok dalam Business Model Canvas yang mendeskripsikan bagaimana perusahaan berkomunikasi dan menjangkau segmen pelanggan untuk menyampaikan proposisi nilai adalah...",
+          "opsi": [
+            "Saluran",
+            "Hubungan Pelanggan",
+            "Aktivitas Kunci",
+            "Arus Pendapatan"
+          ],
+          "kunci": 0,
+          "jelas": "Saluran menggambarkan titik sentuh perusahaan dengan pelanggan, meliputi komunikasi, distribusi, dan penjualan yang digunakan untuk menyampaikan proposisi nilai. Sementara itu, hubungan pelanggan menjelaskan jenis relasi yang dibangun, aktivitas kunci merupakan tindakan penting yang harus dilakukan, dan arus pendapatan adalah sumber pemasukan."
+        },
+        {
+          "id": "q71",
+          "tanya": "Strategi menciptakan ruang pasar yang tak terbantahkan dengan membuat kompetisi menjadi tidak relevan dikenal sebagai...",
+          "opsi": [
+            "Samudra Merah",
+            "Kerangka Kerja Empat Langkah",
+            "Inovasi Nilai",
+            "Blue Ocean Strategy"
+          ],
+          "kunci": 3,
+          "jelas": "Blue Ocean Strategy diperkenalkan Kim dan Mauborgne untuk menggambarkan penciptaan pasar baru tanpa persaingan langsung, berbeda dengan samudra merah yang sudah padat kompetitor."
+        },
+        {
+          "id": "q72",
+          "tanya": "Metafora yang digunakan W. Chan Kim dan Renée Mauborgne untuk menggambarkan ruang pasar yang sudah ramai dengan persaingan ketat disebut...",
+          "opsi": [
+            "Blue Ocean",
+            "Inovasi Nilai",
+            "Samudra Merah",
+            "Pasar Bebas"
+          ],
+          "kunci": 2,
+          "jelas": "Samudra merah melambangkan industri yang sudah mapan di mana batasan dan aturan main telah diketahui bersama, sehingga margin keuntungan terpangkas akibat persaingan sengit."
+        },
+        {
+          "id": "q73",
+          "tanya": "Pencapaian peningkatan nilai bagi pembeli sekaligus pengurangan biaya struktur secara simultan, yang menjadi pilar Blue Ocean Strategy, adalah pengertian dari...",
+          "opsi": [
+            "Samudra Merah",
+            "Inovasi Nilai",
+            "Kerangka Kerja Empat Langkah",
+            "Diferensiasi Biaya"
+          ],
+          "kunci": 1,
+          "jelas": "Inovasi nilai merupakan konsep inti Blue Ocean Strategy di mana perusahaan mengejar diferensiasi dan biaya rendah sekaligus untuk menciptakan lompatan nilai bagi pembeli."
+        },
+        {
+          "id": "q74",
+          "tanya": "Berikut ini yang bukan merupakan elemen dalam Kerangka Kerja Empat Langkah pada Blue Ocean Strategy adalah...",
+          "opsi": [
+            "Menghapuskan",
+            "Meningkatkan",
+            "Menstandarkan",
+            "Menciptakan"
+          ],
+          "kunci": 2,
+          "jelas": "Kerangka kerja empat langkah terdiri dari menghapuskan, mengurangi, meningkatkan, dan menciptakan faktor industri. Menstandarkan bukan bagian dari kerangka tersebut."
+        },
+        {
+          "id": "q75",
+          "tanya": "PT Inovasi Digital menghapus biaya pengiriman yang lazim di industri, meningkatkan kualitas layanan pelanggan, mengurangi waktu tunggu, dan menciptakan fitur personalisasi berbasis AI. Tindakan ini mencerminkan penerapan...",
+          "opsi": [
+            "Analisis SWOT",
+            "Business Model Canvas",
+            "Value Proposition Canvas",
+            "Kerangka Kerja Empat Langkah"
+          ],
+          "kunci": 3,
+          "jelas": "Menghapus, meningkatkan, mengurangi, dan menciptakan merupakan empat langkah khas dalam kerangka kerja Blue Ocean Strategy untuk membentuk kurva nilai baru."
+        },
+        {
+          "id": "q76",
+          "tanya": "Rencana aksi mendetail tentang cara perusahaan menjangkau pelanggan sasaran dan mencapai keunggulan kompetitif disebut...",
+          "opsi": [
+            "Go-to-Market Strategy",
+            "Peluncuran Penuh",
+            "Metrik Kesuksesan",
+            "Peluncuran Lunak"
+          ],
+          "kunci": 0,
+          "jelas": "Go-to-market strategy merupakan cetak biru yang merinci segmen sasaran, proposisi nilai, saluran distribusi, dan taktik untuk memasuki pasar secara efektif."
+        },
+        {
+          "id": "q77",
+          "tanya": "Pelepasan produk secara terbatas ke segmen kecil pengguna untuk menguji produk dan mengumpulkan umpan balik awal dikenal sebagai...",
+          "opsi": [
+            "Peluncuran Lunak",
+            "Go-to-Market Strategy",
+            "Peluncuran Penuh",
+            "Pivot"
+          ],
+          "kunci": 0,
+          "jelas": "Peluncuran lunak atau soft launch membatasi eksposur awal agar tim dapat memperbaiki kekurangan produk berdasarkan umpan balik sebelum menjangkau pasar yang lebih luas."
+        },
+        {
+          "id": "q78",
+          "tanya": "Pelepasan produk secara resmi dan luas ke publik yang biasanya disertai aktivitas promosi besar-besaran merupakan karakteristik dari...",
+          "opsi": [
+            "Peluncuran Lunak",
+            "Peluncuran Penuh",
+            "Validasi Ide",
+            "Produk Minimum Layak"
+          ],
+          "kunci": 1,
+          "jelas": "Peluncuran penuh atau grand launch menandai ketersediaan produk untuk seluruh target pasar, seringkali diiringi kampanye pemasaran yang masif."
+        },
+        {
+          "id": "q79",
+          "tanya": "Sebuah startup meluncurkan aplikasinya hanya kepada 200 pengguna terpilih di satu kota untuk mengamati perilaku penggunaan dan mengumpulkan laporan bug sebelum dirilis secara nasional. Strategi yang diterapkan startup tersebut adalah...",
+          "opsi": [
+            "Peluncuran Penuh",
+            "Go-to-Market Strategy",
+            "Pivot",
+            "Peluncuran Lunak"
+          ],
+          "kunci": 3,
+          "jelas": "Pembatasan rilis ke kelompok kecil dan terbatas untuk menguji serta mengumpulkan umpan balik merupakan ciri khas peluncuran lunak atau soft launch."
+        },
+        {
+          "id": "q80",
+          "tanya": "Indikator kunci seperti akuisisi pengguna, tingkat retensi, dan pendapatan awal yang dijadikan tolok ukur keberhasilan peluncuran produk disebut...",
+          "opsi": [
+            "Corong Penjualan",
+            "Metrik Kesuksesan Peluncuran",
+            "Proyeksi Penjualan",
+            "Value Proposition"
+          ],
+          "kunci": 1,
+          "jelas": "Metrik kesuksesan peluncuran adalah ukuran terukur yang ditetapkan sebelum peluncuran untuk menilai apakah strategi go-to-market berhasil mencapai target yang diinginkan."
+        },
+        {
+          "id": "q81",
+          "tanya": "Proses kepemimpinan dinamis di mana pengaruh didistribusikan di antara anggota tim, bukan terpusat pada satu individu, dikenal dengan istilah...",
+          "opsi": [
+            "Kepemimpinan Otokratis",
+            "Kepemimpinan Transformasional",
+            "Kepemimpinan Bersama",
+            "Kepemimpinan Situasional"
+          ],
+          "kunci": 2,
+          "jelas": "Kepemimpinan bersama atau shared leadership mendistribusikan kekuasaan dan tanggung jawab kepemimpinan ke seluruh anggota tim, bukan hanya pada satu pemimpin formal."
+        },
+        {
+          "id": "q82",
+          "tanya": "Pendelegasian wewenang dan tanggung jawab kepada anggota tim untuk membuat keputusan dan mengambil tindakan dalam konteks kepemimpinan bersama merupakan pengertian dari...",
+          "opsi": [
+            "Akuntabilitas Kolektif",
+            "Keamanan Psikologis",
+            "Kepemimpinan Adaptif",
+            "Empowerment Tim"
+          ],
+          "kunci": 3,
+          "jelas": "Empowerment tim berarti memberikan otonomi kepada anggota untuk bertindak dan memutuskan, yang merupakan fondasi penting dalam model kepemimpinan bersama."
+        },
+        {
+          "id": "q83",
+          "tanya": "Rasa tanggung jawab bersama di antara anggota tim atas hasil dan kinerja tim secara keseluruhan merupakan definisi dari...",
+          "opsi": [
+            "Empowerment Tim",
+            "Akuntabilitas Kolektif",
+            "Kepemimpinan Bersama",
+            "Keamanan Psikologis"
+          ],
+          "kunci": 1,
+          "jelas": "Akuntabilitas kolektif menekankan bahwa keberhasilan maupun kegagalan menjadi tanggungan seluruh tim, tidak dapat dilimpahkan kepada satu individu saja."
+        },
+        {
+          "id": "q84",
+          "tanya": "Praktik memobilisasi orang dan tim untuk menghadapi tantangan kompleks dan berkembang di atasnya, yang digagas oleh Ronald Heifetz, disebut...",
+          "opsi": [
+            "Kepemimpinan Bersama",
+            "Empowerment Tim",
+            "Kepemimpinan Adaptif",
+            "Akuntabilitas Kolektif"
+          ],
+          "kunci": 2,
+          "jelas": "Kepemimpinan adaptif menurut Heifetz adalah kemampuan memobilisasi orang menghadapi tantangan adaptif yang membutuhkan perubahan nilai, keyakinan, atau kebiasaan."
+        },
+        {
+          "id": "q85",
+          "tanya": "Prinsip yang mendorong wirausaha untuk mengendalikan hasil usaha dengan berfokus pada aktivitas dan sumber daya yang berada dalam kendali langsung mereka daripada mencoba memprediksi masa depan yang tidak pasti dikenal sebagai...",
+          "opsi": [
+            "Prinsip Pilot dalam Pesawat",
+            "Prinsip Burung di Tangan",
+            "Prinsip Selimut Tambal Sulam",
+            "Prinsip Limun"
+          ],
+          "kunci": 0,
+          "jelas": "Dalam logika effectuation, keyakinan bahwa masa depan dapat diciptakan melalui tindakan yang berada dalam kendali sendiri merupakan inti dari prinsip pilot dalam pesawat. Hal ini menekankan fokus pada aspek-aspek yang dapat dikontrol langsung oleh wirausaha, alih-alih bergantung pada prediksi eksternal yang belum tentu akurat."
+        },
+        {
+          "id": "q86",
+          "tanya": "Model perkembangan tim yang melewati fase pembentukan, konflik, normalisasi, dan performa digagas oleh...",
+          "opsi": [
+            "Bruce Tuckman",
+            "Amy Edmondson",
+            "Ronald Heifetz",
+            "J. Richard Hackman"
+          ],
+          "kunci": 0,
+          "jelas": "Bruce Tuckman merumuskan model empat tahap perkembangan tim: forming, storming, norming, dan performing."
+        },
+        {
+          "id": "q87",
+          "tanya": "Tim yang beranggotakan individu dari berbagai disiplin fungsional berbeda untuk bekerja menuju tujuan yang sama disebut...",
+          "opsi": [
+            "Tim Fungsional",
+            "Tim Lintas Fungsi",
+            "Tim Otonom",
+            "Tim Virtual"
+          ],
+          "kunci": 1,
+          "jelas": "Cross-functional team didefinisikan sebagai tim yang anggotanya berasal dari beragam fungsi atau departemen berbeda dalam organisasi."
+        },
+        {
+          "id": "q88",
+          "tanya": "Keyakinan bersama bahwa anggota tim aman untuk mengambil risiko interpersonal tanpa merasa malu atau dihukum dikenal sebagai...",
+          "opsi": [
+            "Akuntabilitas Kolektif",
+            "Keamanan Psikologis",
+            "Keberagaman Kognitif",
+            "Empowerment Tim"
+          ],
+          "kunci": 1,
+          "jelas": "Amy Edmondson mendefinisikan keamanan psikologis sebagai keyakinan bahwa seseorang tidak akan dihukum atau dipermalukan karena menyuarakan ide, pertanyaan, atau kesalahan."
+        },
+        {
+          "id": "q89",
+          "tanya": "Variasi cara berpikir dan perspektif pemecahan masalah di antara anggota tim yang mendorong inovasi merupakan pengertian dari...",
+          "opsi": [
+            "Keberagaman Kognitif",
+            "Keberagaman Demografis",
+            "Keberagaman Fungsional",
+            "Keberagaman Kepribadian"
+          ],
+          "kunci": 0,
+          "jelas": "Keberagaman kognitif merujuk pada perbedaan dalam cara individu memproses informasi, memandang masalah, dan menghasilkan solusi."
+        },
+        {
+          "id": "q90",
+          "tanya": "Seorang pemimpin tim startup digital sengaja merekrut seorang psikolog, seorang programmer, dan seorang desainer grafis untuk mengerjakan satu proyek aplikasi seluler. Langkah ini paling tepat mencerminkan pembentukan...",
+          "opsi": [
+            "Tim fungsional terspesialisasi",
+            "Tim hierarkis tradisional",
+            "Tim lintas fungsi",
+            "Tim dengan struktur matriks"
+          ],
+          "kunci": 2,
+          "jelas": "Anggota yang berasal dari tiga disiplin berbeda (psikologi, pemrograman, desain) yang bekerja bersama untuk tujuan sama mencirikan tim lintas fungsi."
+        },
+        {
+          "id": "q91",
+          "tanya": "Nilai tambah yang diberikan oleh merek kepada suatu produk di luar manfaat fungsionalnya disebut...",
+          "opsi": [
+            "Identitas Merek",
+            "Ekuitas Merek",
+            "Kesadaran Merek",
+            "Citra Merek"
+          ],
+          "kunci": 1,
+          "jelas": "David Aaker mendefinisikan brand equity sebagai seperangkat aset dan liabilitas yang menambah atau mengurangi nilai yang diberikan produk."
+        },
+        {
+          "id": "q92",
+          "tanya": "Tindakan merancang citra dan penawaran perusahaan agar menempati posisi yang khas dan berbeda di benak konsumen sasaran merupakan pengertian dari...",
+          "opsi": [
+            "Segmentasi Pasar",
+            "Penetapan Posisi",
+            "Diferensiasi Produk",
+            "Targeting Pasar"
+          ],
+          "kunci": 1,
+          "jelas": "Al Ries dan Jack Trout mendefinisikan positioning sebagai upaya menempatkan produk di pikiran calon pembeli dengan cara yang khas."
+        },
+        {
+          "id": "q93",
+          "tanya": "Ekspresi dari merek yang mencakup elemen visual, verbal, dan perilaku sehingga membentuk keunikannya dikenal sebagai...",
+          "opsi": [
+            "Ekuitas Merek",
+            "Loyalitas Merek",
+            "Identitas Merek",
+            "Asosiasi Merek"
+          ],
+          "kunci": 2,
+          "jelas": "Identitas merek adalah ekspresi merek yang meliputi elemen visual, verbal, dan perilaku yang menjadikannya unik dan dapat dikenali."
+        },
+        {
+          "id": "q94",
+          "tanya": "Kumpulan asosiasi dan persepsi yang terbentuk dalam benak konsumen mengenai suatu produk, layanan, atau identitas perusahaan disebut...",
+          "opsi": [
+            "Tagline",
+            "Logo",
+            "Merek",
+            "Kemasan"
+          ],
+          "kunci": 2,
+          "jelas": "Merek adalah konstruksi perseptual yang terdiri dari asosiasi, persepsi, dan ekspektasi konsumen terhadap suatu entitas atau produk."
+        },
+        {
+          "id": "q95",
+          "tanya": "Perbedaan utama antara ekuitas merek dan identitas merek terletak pada...",
+          "opsi": [
+            "Ekuitas merek bersifat visual, sedangkan identitas merek bersifat finansial",
+            "Ekuitas merek dikendalikan konsumen, sedangkan identitas merek dikendalikan pemerintah",
+            "Ekuitas merek hanya berlaku untuk produk, sedangkan identitas merek hanya untuk jasa",
+            "Ekuitas merek adalah nilai tambah yang diberikan merek, sedangkan identitas merek adalah ekspresi keunikan merek"
+          ],
+          "kunci": 3,
+          "jelas": "Ekuitas merek berfokus pada nilai tambah yang dirasakan dan dampaknya, sementara identitas merek berfokus pada bagaimana merek mengekspresikan dirinya melalui elemen visual, verbal, dan perilaku."
+        },
+        {
+          "id": "q96",
+          "tanya": "Lintasan yang dilalui oleh informasi, promosi, atau transaksi dari produsen ke konsumen melalui media digital merupakan pengertian dari...",
+          "opsi": [
+            "Saluran Pemasaran Digital",
+            "Corong Penjualan",
+            "Logistik Digital",
+            "Sistem Pembayaran Digital"
+          ],
+          "kunci": 0,
+          "jelas": "Saluran pemasaran digital adalah jalur yang menghubungkan produsen dengan konsumen melalui media digital untuk menyampaikan informasi, promosi, atau transaksi."
+        },
+        {
+          "id": "q97",
+          "tanya": "Pendekatan integrasi penuh semua saluran interaksi dan distribusi untuk memberikan pengalaman pelanggan yang mulus disebut...",
+          "opsi": [
+            "Multi-channel",
+            "Cross-channel",
+            "Single-channel",
+            "Omni-channel"
+          ],
+          "kunci": 3,
+          "jelas": "Omni-channel mengintegrasikan seluruh saluran secara penuh sehingga pelanggan mendapat pengalaman yang konsisten dan mulus di setiap titik kontak."
+        },
+        {
+          "id": "q98",
+          "tanya": "Berikut ini yang bukan merupakan perbedaan antara corong penjualan dan corong pemasaran digital adalah...",
+          "opsi": [
+            "Corong penjualan dan corong pemasaran digital keduanya tidak melibatkan tahap kesadaran",
+            "Corong penjualan fokus pada konversi, sedangkan corong pemasaran digital mencakup retensi jangka panjang",
+            "Corong penjualan berakhir setelah pembelian, sedangkan corong pemasaran digital mencakup tahap loyalitas dan advokasi",
+            "Corong pemasaran digital meliputi tahap advokasi, sedangkan corong penjualan tradisional berhenti di transaksi"
+          ],
+          "kunci": 0,
+          "jelas": "Kedua model corong justru sama-sama melibatkan tahap kesadaran (awareness) sebagai entry point. Pernyataan bahwa keduanya tidak melibatkan tahap kesadaran adalah keliru."
+        },
+        {
+          "id": "q99",
+          "tanya": "Perkiraan volume atau nilai penjualan di masa depan berdasarkan data historis, analisis pasar, dan strategi yang direncanakan disebut...",
+          "opsi": [
+            "Anggaran Operasional",
+            "Arus Pendapatan",
+            "Target Pasar",
+            "Proyeksi Penjualan"
+          ],
+          "kunci": 3,
+          "jelas": "Proyeksi penjualan adalah estimasi terukur mengenai penjualan di masa mendatang yang didasarkan pada data historis, riset pasar, dan rencana strategis."
+        },
+        {
+          "id": "q100",
+          "tanya": "Model yang menggambarkan perjalanan pelanggan dari tahap kesadaran hingga tindakan pembelian dalam konteks digital, namun juga mencakup tahap loyalitas dan advokasi, adalah...",
+          "opsi": [
+            "Corong Penjualan",
+            "Siklus Hidup Produk",
+            "Saluran Distribusi",
+            "Corong Pemasaran Digital"
+          ],
+          "kunci": 3,
+          "jelas": "Corong pemasaran digital memperluas corong penjualan tradisional dengan menambahkan tahap loyalitas dan advokasi pasca-pembelian."
+        }
+      ]
+    }
+  ]
+};
+
+</script>
+<script>
+/* QuizLearn: logika website. Tidak perlu diubah untuk mengganti soal (edit data.js). */
+(function () {
+  'use strict';
+
+  var D = window.QL_DATA;
+  // Jika beberapa quiz dipasang di domain yang sama, isi "kunciPenyimpanan" di data.js
+  // (misalnya "pemjasa") agar riwayat tiap mata kuliah tidak tercampur.
+  var PFX = D.kunciPenyimpanan ? 'ql_' + D.kunciPenyimpanan + '_' : 'ql_';
+  var K_RIWAYAT = PFX + 'riwayat_v1';
+  var K_AKTIF = PFX + 'ujian_aktif_v1';
+  var VIEWS = ['beranda', 'latihan', 'ujian', 'progres'];
+  // Batas analisis penguasaan (bisa diubah di data.js > pengaturan > penguasaan)
+  var PG = (D.pengaturan && D.pengaturan.penguasaan) || {};
+  var BATAS_KUASAI = PG.batasDikuasai || 80;   // persen benar minimal untuk "Dikuasai"
+  var BATAS_CUKUP = PG.batasCukup || 60;       // persen benar minimal untuk "Cukup"
+  var MIN_BAB = PG.minJawabanBab || 5;         // jumlah jawaban minimal agar bab dinilai
+  var MIN_SOAL = PG.minJawabanSoal || 2;       // soal dinilai setelah dijawab minimal sekian kali
+  var BATAS_SALAH = PG.batasSoalSalah || 50;   // persen salah minimal agar soal masuk "sering salah"
+
+  /* ---------- penyimpanan (aman jika localStorage diblokir) ---------- */
+  var mem = {};
+  function sget(k) {
+    try { var v = localStorage.getItem(k); return v === null ? (mem[k] || null) : v; }
+    catch (e) { return mem[k] || null; }
+  }
+  function sset(k, v) { mem[k] = v; try { localStorage.setItem(k, v); } catch (e) {} }
+  function sdel(k) { delete mem[k]; try { localStorage.removeItem(k); } catch (e) {} }
+  function parse(s, fb) { try { return s ? JSON.parse(s) : fb; } catch (e) { return fb; } }
+
+  /* ---------- data soal ---------- */
+  var Q = {};       // id -> soal
+  var ALL = [];     // semua id soal berurutan dari bab pertama
+  var BAB = {};     // id bab -> bab
+  D.bab.forEach(function (b) {
+    BAB[b.id] = b;
+    b.soal.forEach(function (s) {
+      s.babId = b.id; s.babJudul = b.judul;
+      Q[s.id] = s; ALL.push(s.id);
+    });
+  });
+
+  /* ---------- util ---------- */
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtNum(n) { return Number(n).toLocaleString('id-ID', { maximumFractionDigits: 1 }); }
+  function fmtTime(sec) {
+    sec = Math.max(0, sec);
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function fmtDate(iso) {
+    try {
+      return new Date(iso).toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    } catch (e) { return iso; }
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  var LET = ['A', 'B', 'C', 'D'];
+
+  var P = {
+    home: '<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/>',
+    book: '<path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v13.5"/>',
+    pencil: '<path d="M4 20l1-4L16 5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="M14 7l3 3"/>',
+    trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H4v2a3 3 0 0 0 4 2.8M16 6h4v2a3 3 0 0 1-4 2.8"/><path d="M12 13v4M8.5 20h7M10 17h4"/>',
+    chart: '<rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="5" width="4" height="15" rx="1"/><rect x="16" y="9" width="4" height="11" rx="1"/>',
+    clip: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/>',
+    star: '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',
+    target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>',
+    chev: '<path d="M9 6l6 6-6 6"/>',
+    left: '<path d="M15 6l-6 6 6 6"/>',
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    x: '<path d="M6 6l12 12M18 6L6 18"/>',
+    flag: '<path d="M6 21V4"/><path d="M6 5h11l-2 4 2 4H6"/>',
+    grid: '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+    bolt: '<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>',
+    calc: '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/>',
+    bksp: '<path d="M21 5H9l-6 7 6 7h12z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/>',
+    clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'
+  };
+  function ic(n, s) {
+    s = s || 22;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + P[n] + '</svg>';
+  }
+
+  /* ---------- riwayat ujian ---------- */
+  function validRec(x) {
+    return x && typeof x === 'object' && typeof x.id === 'string' && x.id.length > 0 && x.id.length <= 40 &&
+      typeof x.tanggal === 'string' && !isNaN(new Date(x.tanggal).getTime()) &&
+      Number.isInteger(x.benar) && Number.isInteger(x.salah) && x.benar >= 0 && x.salah >= 0 && x.benar + x.salah > 0;
+  }
+  function cleanRec(x) {
+    var total = x.benar + x.salah;
+    return {
+      id: x.id,
+      tanggal: new Date(x.tanggal).toISOString(),
+      benar: x.benar, salah: x.salah, total: total,
+      nilai: Math.round(x.benar / total * 1000) / 10,
+      durasi: Number.isFinite(x.durasi) && x.durasi >= 0 ? Math.round(x.durasi) : 0,
+      waktuHabis: !!x.waktuHabis,
+      detail: cleanDetail(x.detail)
+    };
+  }
+  // detail: id soal -> 1 (benar), 0 (salah), -1 (tidak sempat dijawab karena waktu habis)
+  function cleanDetail(d) {
+    var o = {}, n = 0;
+    if (!d || typeof d !== 'object' || Array.isArray(d)) return o;
+    Object.keys(d).forEach(function (k) {
+      if (n < 1000 && k.length <= 40 && k !== '__proto__' && (d[k] === 1 || d[k] === 0 || d[k] === -1)) { o[k] = d[k]; n++; }
+    });
+    return o;
+  }
+  function hasQ(id) { return Object.prototype.hasOwnProperty.call(Q, id); }
+  function getHist() {
+    var r = parse(sget(K_RIWAYAT), []);
+    return Array.isArray(r) ? r.filter(validRec).map(cleanRec) : [];
+  }
+  function setHist(h) { sset(K_RIWAYAT, JSON.stringify(h)); }
+  function stats(h) {
+    if (!h.length) return { n: 0, avg: null, max: null, last: null };
+    var sum = 0, max = 0;
+    h.forEach(function (r) { sum += r.nilai; if (r.nilai > max) max = r.nilai; });
+    return { n: h.length, avg: Math.round(sum / h.length * 10) / 10, max: max, last: h[h.length - 1].nilai };
+  }
+
+  /* ---------- analisis penguasaan (dari riwayat ujian) ---------- */
+  function statusBab(n, pct) {
+    if (n < MIN_BAB) return { k: 'data', t: 'Belum cukup data' };
+    if (pct >= BATAS_KUASAI) return { k: 'kuasai', t: 'Dikuasai' };
+    if (pct >= BATAS_CUKUP) return { k: 'cukup', t: 'Cukup' };
+    return { k: 'belum', t: 'Belum dikuasai' };
+  }
+  function analisis(h) {
+    var perSoal = {}, perBab = {}, ada = false;
+    D.bab.forEach(function (b) { perBab[b.id] = { b: b, benar: 0, salah: 0 }; });
+    h.forEach(function (r) {
+      Object.keys(r.detail || {}).forEach(function (id) {
+        var c = r.detail[id];
+        if (!hasQ(id) || c === -1) return;   // soal yang tidak sempat dijawab tidak dihitung
+        ada = true;
+        var s = perSoal[id] || (perSoal[id] = { id: id, benar: 0, salah: 0 });
+        var bb = perBab[Q[id].babId];
+        if (c === 1) { s.benar++; bb.benar++; } else { s.salah++; bb.salah++; }
+      });
+    });
+    var bab = D.bab.map(function (b) {
+      var x = perBab[b.id], n = x.benar + x.salah, pct = n ? Math.round(x.benar / n * 100) : 0;
+      return { b: b, n: n, pct: pct, st: statusBab(n, pct) };
+    });
+    var salah = [], benar = [];
+    ALL.forEach(function (id) {
+      var s = perSoal[id];
+      if (!s) return;
+      var n = s.benar + s.salah;
+      if (n < MIN_SOAL) return;
+      if (s.salah === 0) benar.push(s);
+      else if (s.salah / n * 100 >= BATAS_SALAH) salah.push(s);
+    });
+    salah.sort(function (a, b) {
+      return (b.salah / (b.benar + b.salah)) - (a.salah / (a.benar + a.salah)) || b.salah - a.salah;
+    });
+    return { ada: ada, bab: bab, salah: salah, benar: benar };
+  }
+
+  /* ---------- status aplikasi ---------- */
+  var view = readHash();
+  var lat = { fase: 'awal', list: [], i: 0, ans: {}, b: 'semua', label: '' };
+  var aktif = loadAktif();      // ujian yang sedang berjalan
+  var ujHasil = null;           // hasil ujian terakhir (ditampilkan sekali)
+  var navOpen = false;          // pop-up navigasi nomor soal
+  var calcOpen = false;         // pop-up kalkulator
+  var calc = null;              // status kalkulator (diisi di bagian kalkulator)
+  var confirming = false;       // panel konfirmasi akhiri ujian
+  var hapusConfirm = false;     // panel konfirmasi hapus riwayat
+  var cadangan = null;          // teks cadangan untuk disalin manual
+  var lastView = null;
+
+  /* ---------- kunci ujian: selama ujian berjalan, pengguna tidak boleh pindah halaman ---------- */
+  var PESAN_KUNCI = 'Ujian sedang berjalan. Selesaikan ujian dulu sebelum pindah halaman.';
+  function terkunci() { return !!aktif; }
+  function kembaliKeUjian() {
+    try { history.replaceState(null, '', '#ujian'); } catch (e) { location.hash = 'ujian'; }
+  }
+  // Jika halaman dibuka ulang (refresh) saat ujian masih berjalan, langsung kembali ke ujian.
+  if (aktif && view !== 'ujian') { view = 'ujian'; kembaliKeUjian(); }
+
+  function readHash() {
+    var h = (location.hash || '').replace('#', '');
+    return VIEWS.indexOf(h) >= 0 ? h : 'beranda';
+  }
+  function loadAktif() {
+    var a = parse(sget(K_AKTIF), null);
+    if (!a || !Array.isArray(a.ids) || !a.ids.length || typeof a.endAt !== 'number' || typeof a.startAt !== 'number') return null;
+    for (var i = 0; i < a.ids.length; i++) { if (!Q[a.ids[i]]) return null; }
+    a.answers = (a.answers && typeof a.answers === 'object') ? a.answers : {};
+    var fl = {};
+    if (a.flags && typeof a.flags === 'object') { a.ids.forEach(function (id) { if (a.flags[id] === true && a.answers[id] !== undefined && a.answers[id] !== null) fl[id] = true; }); }
+    a.flags = fl;
+    a.idx = Math.min(Math.max(0, a.idx | 0), a.ids.length - 1);
+    return a;
+  }
+  function saveAktif() { sset(K_AKTIF, JSON.stringify(aktif)); }
+
+  /* ---------- tampilan ---------- */
+  var $main = document.getElementById('main');
+  var $dock = document.getElementById('dock');
+  var $toast = document.getElementById('toast');
+  var $ov = document.createElement('div'); $ov.id = 'overlay'; document.body.appendChild($ov);
+  var toastTimer = null;
+  document.getElementById('mapel').textContent = D.mapel;
+
+  function toast(msg) {
+    $toast.textContent = msg;
+    $toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { $toast.classList.remove('show'); }, 3800);
+  }
+
+  var DOCK_ITEMS = [['beranda', 'Beranda', 'home'], ['latihan', 'Latihan', 'pencil'], ['ujian', 'Ujian', 'trophy'], ['progres', 'Progres', 'chart']];
+  function renderDock() {
+    if ($dock.children.length !== DOCK_ITEMS.length) {
+      $dock.innerHTML = DOCK_ITEMS.map(function (it) {
+        return '<button type="button" data-act="go" data-v="' + it[0] + '">' + ic(it[2]) + it[1] + '</button>';
+      }).join('');
+    }
+    // Tombol dipertahankan; hanya penanda halaman aktif yang diganti agar transisinya halus.
+    for (var i = 0; i < $dock.children.length; i++) {
+      var b = $dock.children[i];
+      if (b.getAttribute('data-v') === view) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+      // Saat ujian berjalan, menu selain Ujian dinonaktifkan.
+      var kunci = terkunci() && b.getAttribute('data-v') !== 'ujian';
+      if (kunci) { b.setAttribute('aria-disabled', 'true'); b.style.opacity = '.4'; }
+      else { b.removeAttribute('aria-disabled'); b.style.opacity = ''; }
+    }
+  }
+
+  function reduced() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+
+  /* ---- Pembaruan DOM tanpa membangun ulang: elemen yang sama dipertahankan sehingga transisi CSS,
+     fokus, dan efek tekan tombol tidak terputus saat jawaban dipilih atau soal berganti. ---- */
+  var KEEP_CLS = ['ql-pressed', 'q-in-next', 'q-in-prev'];
+  function syncClass(o, n) {
+    var want = n.getAttribute('class') || '';
+    var keep = KEEP_CLS.filter(function (c) { return o.classList.contains(c) && !n.classList.contains(c); });
+    if (keep.length) want = (want + ' ' + keep.join(' ')).trim();
+    if (want) { if (o.getAttribute('class') !== want) o.setAttribute('class', want); }
+    else if (o.hasAttribute('class')) o.removeAttribute('class');
+  }
+  function syncAttrs(o, n) {
+    var i, nm;
+    for (i = o.attributes.length - 1; i >= 0; i--) {
+      nm = o.attributes[i].name;
+      if (nm !== 'class' && !n.hasAttribute(nm)) o.removeAttribute(nm);
+    }
+    for (i = 0; i < n.attributes.length; i++) {
+      nm = n.attributes[i].name;
+      if (nm !== 'class' && o.getAttribute(nm) !== n.attributes[i].value) o.setAttribute(nm, n.attributes[i].value);
+    }
+    syncClass(o, n);
+  }
+  function morph(o, n) {
+    if (o.nodeType !== n.nodeType || o.nodeName !== n.nodeName) { o.parentNode.replaceChild(n, o); return; }
+    if (o.nodeType === 3 || o.nodeType === 8) { if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue; return; }
+    if (o.nodeType !== 1) return;
+    syncAttrs(o, n);
+    morphKids(o, n);
+  }
+  function kid(c) { return c.nodeType === 1 && c.id ? c.id : ''; }
+  // Elemen ber-id dicocokkan lewat id-nya (mis. kolom isian), sisanya lewat urutan.
+  function morphKids(o, n) {
+    var oa = Array.prototype.slice.call(o.childNodes), na = Array.prototype.slice.call(n.childNodes);
+    var byId = {}, newIds = {}, used = [], pos = 0, i, oc, nc;
+    oa.forEach(function (c) { if (kid(c)) byId[kid(c)] = c; });
+    na.forEach(function (c) { if (kid(c)) newIds[kid(c)] = true; });
+    for (i = 0; i < na.length; i++) {
+      nc = na[i]; oc = null;
+      if (kid(nc) && byId[kid(nc)] && used.indexOf(byId[kid(nc)]) < 0) oc = byId[kid(nc)];
+      else if (!kid(nc)) {
+        while (pos < oa.length && (used.indexOf(oa[pos]) >= 0 || (kid(oa[pos]) && newIds[kid(oa[pos])]))) pos++;
+        if (pos < oa.length) oc = oa[pos++];
+      }
+      if (oc) {
+        used.push(oc);
+        if (o.childNodes[i] !== oc) o.insertBefore(oc, o.childNodes[i] || null);
+        morph(oc, nc);
+      } else {
+        o.insertBefore(nc, o.childNodes[i] || null);
+      }
+    }
+    oa.forEach(function (c) { if (used.indexOf(c) < 0 && c.parentNode === o) o.removeChild(c); });
+  }
+  function patchMain(html, force) {
+    if (force) { $main.innerHTML = html; return; }
+    var t = document.createElement('template');
+    t.innerHTML = html;
+    morphKids($main, t.content);
+  }
+
+  /* ---- Transisi pindah soal ---- */
+  var pendingNav = null;   // perpindahan soal yang menunggu animasi keluar selesai
+  function isQuestionView() {
+    return view === 'latihan' ? lat.fase === 'jalan' : !!(view === 'ujian' && aktif && !ujHasil);
+  }
+  function animQuestion(dir) {
+    var el = $main.querySelector('.qsec');
+    if (!el) return;
+    el.classList.remove('q-out-next', 'q-out-prev', 'q-in-next', 'q-in-prev');
+    void el.offsetWidth;   // paksa browser mengulang animasi
+    var cls = dir === 'prev' ? 'q-in-prev' : 'q-in-next';
+    el.classList.add(cls);
+    var selesai = function () { el.classList.remove(cls); el.removeEventListener('animationend', selesai); };
+    el.addEventListener('animationend', selesai);
+    setTimeout(selesai, 400);
+  }
+  function pindahSoal(arah, ubah) {
+    ubah();   // status berubah segera; tampilan menyusul setelah animasi keluar
+    if (reduced()) { render({ top: true, questionDirection: arah }); return; }
+    if (pendingNav) { pendingNav.arah = arah; return; }   // ketukan beruntun: cukup render sekali dengan status terbaru
+    var cur = $main.querySelector('.qsec');
+    if (cur) cur.classList.add(arah === 'prev' ? 'q-out-prev' : 'q-out-next');
+    pendingNav = { arah: arah, t: null };
+    pendingNav.t = setTimeout(function () { render({ top: true, questionDirection: arah }); }, 110);
+  }
+
+  /* ---- Pop-up (navigasi soal dan kalkulator) ---- */
+  var ovKey = '';
+  function overlayKey() {
+    var on = (navOpen || calcOpen) && ((view === 'ujian' && aktif && !ujHasil) || (view === 'latihan' && lat.fase === 'jalan'));
+    if (!on) { navOpen = false; calcOpen = false; return ''; }
+    return calcOpen ? 'calc' : (view === 'latihan' ? 'lat-nav' : 'uj-nav');
+  }
+  function setInert(on) {
+    [document.querySelector('.app'), document.getElementById('dock')].forEach(function (x) {
+      if (!x) return;
+      if (on) x.setAttribute('inert', ''); else x.removeAttribute('inert');
+    });
+  }
+  // Hanya membangun ulang pop-up bila jenisnya berubah, sehingga animasi buka tidak terulang dan isi halaman tidak berkedip.
+  function syncOverlay() {
+    var key = overlayKey();
+    if (key === ovKey && (key === '' || $ov.firstChild)) return;
+    ovKey = key;
+    $ov.innerHTML = key === 'calc' ? vCalcPopup() : key === 'lat-nav' ? vLatNavPopup() : key === 'uj-nav' ? vNavPopup() : '';
+    setInert(!!key);
+    document.body.style.overflow = key ? 'hidden' : '';
+  }
+  function closePopup(cb) {
+    var popup = $ov.querySelector('.ov');
+    var selesai = function () { navOpen = false; calcOpen = false; syncOverlay(); if (cb) cb(); };
+    if (!popup) { selesai(); return; }
+    if (popup.classList.contains('is-closing')) return;
+    popup.classList.add('is-closing');
+    setTimeout(selesai, reduced() ? 0 : 175);
+  }
+  function fokus(act) {
+    var el = document.querySelector('[data-act="' + act + '"]');
+    if (el) el.focus();
+  }
+
+  function render(opts) {
+    opts = opts || {};
+    if (pendingNav) {
+      clearTimeout(pendingNav.t);
+      if (!opts.questionDirection) { opts.questionDirection = pendingNav.arah; opts.top = true; }
+      pendingNav = null;
+    }
+    var html;
+    if (view === 'latihan') html = vLatihan();
+    else if (view === 'ujian') html = vUjian();
+    else if (view === 'progres') html = vProgres();
+    else html = vBeranda();
+    var swap = !!opts.questionDirection && isQuestionView() && lastView === view && !reduced();
+    if (swap) $main.classList.add('q-swap');   // matikan transisi isi kartu selama soal diganti
+    patchMain(html, lastView !== view);
+    if (swap) {
+      animQuestion(opts.questionDirection);
+      var lepas = function () { $main.classList.remove('q-swap'); };
+      if (window.requestAnimationFrame) requestAnimationFrame(function () { requestAnimationFrame(lepas); });
+      else setTimeout(lepas, 50);
+    }
+    syncOverlay();
+    renderDock();
+    document.title = 'QuizLearn - ' + D.mapel;
+    if (lastView !== view || opts.top) {
+      window.scrollTo(0, 0);
+      if (lastView !== view) { try { $main.focus({ preventScroll: true }); } catch (e) {} }
+    }
+    lastView = view;
+    tick();
+  }
+
+  function go(v) {
+    if (terkunci() && v !== 'ujian') { toast(PESAN_KUNCI); return; }
+    if (location.hash === '#' + v) { view = v; render(); }
+    else { location.hash = v; }
+  }
+  window.addEventListener('hashchange', function () {
+    var v = readHash();
+    // Tombol Kembali / ubah alamat saat ujian berjalan: batalkan dan tetap di ujian.
+    if (terkunci() && v !== 'ujian') { kembaliKeUjian(); view = 'ujian'; toast(PESAN_KUNCI); render(); return; }
+    view = v; render();
+  });
+  // Peringatan bila pengguna mencoba menutup / memuat ulang halaman saat ujian berjalan.
+  window.addEventListener('beforeunload', function (e) {
+    if (terkunci()) { e.preventDefault(); e.returnValue = ''; return ''; }
+  });
+
+  /* ----- grafik nilai ----- */
+  function chart(h) {
+    var d = h.slice(-7), n = d.length;
+    if (!n) return '<p class="empty">Belum ada data. Selesaikan satu ujian untuk melihat grafik nilai.</p>';
+    var x0 = 40, x1 = 292, base = 130;
+    var pts = d.map(function (r, i) {
+      return { x: n === 1 ? 166 : x0 + i * (x1 - x0) / (n - 1), y: base - r.nilai, r: r, no: h.length - n + i + 1 };
+    });
+    var last = pts[n - 1];
+    var s = '<svg class="chart" viewBox="0 0 320 152" role="img" aria-label="Grafik nilai ujian terakhir, nilai terbaru ' + fmtNum(last.r.nilai) + '">';
+    s += '<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0A0A" stop-opacity="0.18"/><stop offset="1" stop-color="#0A0A0A" stop-opacity="0"/></linearGradient></defs>';
+    [100, 75, 50, 25, 0].forEach(function (v) {
+      s += '<line class="gl" x1="30" y1="' + (base - v) + '" x2="312" y2="' + (base - v) + '"/>';
+      s += '<text x="24" y="' + (base - v + 3) + '" text-anchor="end">' + v + '</text>';
+    });
+    if (n > 1) {
+      s += '<path d="M' + pts[0].x + ',' + base + ' ' + pts.map(function (p) { return 'L' + p.x + ',' + p.y; }).join(' ') + ' L' + last.x + ',' + base + ' Z" fill="url(#ag)"/>';
+      s += '<polyline class="ln" points="' + pts.map(function (p) { return p.x + ',' + p.y; }).join(' ') + '"/>';
+    }
+    pts.forEach(function (p, i) {
+      if (i < n - 1) s += '<circle class="pt" cx="' + p.x + '" cy="' + p.y + '" r="4.5"/>';
+    });
+    s += '<circle class="pe" cx="' + last.x + '" cy="' + last.y + '" r="5.5"/>';
+    var ty = Math.max(2, last.y - 28), tx = Math.min(last.x - 20, 278);
+    s += '<rect class="tip" x="' + tx + '" y="' + ty + '" width="40" height="18" rx="9"/>';
+    s += '<text class="tipt" x="' + (tx + 20) + '" y="' + (ty + 13) + '" text-anchor="middle">' + fmtNum(last.r.nilai) + '</text>';
+    pts.forEach(function (p) { s += '<text x="' + p.x + '" y="147" text-anchor="middle">#' + p.no + '</text>'; });
+    return s + '</svg>';
+  }
+
+  /* ----- beranda ----- */
+  function statsHtml(st) {
+    var items = [
+      ['clip', st.n ? String(st.n) : '0', 'Ujian Selesai'],
+      ['target', st.avg === null ? '–' : fmtNum(st.avg), 'Rata-rata Nilai'],
+      ['trophy', st.max === null ? '–' : fmtNum(st.max), 'Nilai Tertinggi'],
+      ['star', st.last === null ? '–' : fmtNum(st.last), 'Nilai Terakhir']
+    ];
+    return '<div class="stats">' + items.map(function (it) {
+      return '<div class="glass stat">' + ic(it[0], 24) + '<b>' + it[1] + '</b><span>' + it[2] + '</span></div>';
+    }).join('') + '</div>';
+  }
+
+  function vBeranda() {
+    var h = getHist(), st = stats(h);
+    var jml = Math.min(D.pengaturan.ujianJumlahSoal, ALL.length), mnt = D.pengaturan.ujianMenit;
+    var html = '<h1 class="h1">Selamat Datang Kembali!</h1>' +
+      '<p class="lead">Berlatih, lalu uji pemahamanmu di ' + esc(D.mapel) + '.</p>';
+    if (aktif) {
+      html += '<section class="glass card" style="flex-direction:row;align-items:center;flex-wrap:wrap"><div style="flex:1 1 160px"><h3 class="h3">Ujian sedang berjalan</h3><span class="muted small">Waktu terus berjalan. Lanjutkan sebelum habis.</span></div><button type="button" class="btn btn-sm" data-act="go" data-v="ujian">Lanjutkan</button></section>';
+    }
+    html += statsHtml(st);
+    html += '<section class="card dark on-dark"><div class="eyebrow">Ujian Quiz</div>' +
+      '<div class="cta"><div class="grow"><div class="t">Uji pemahamanmu</div><div class="meta">' + jml + ' soal, ' + mnt + ' menit</div></div>' +
+      '<button type="button" class="btn btn-light" data-act="go" data-v="ujian">Mulai Ujian ' + ic('arrow', 16) + '</button></div></section>';
+    html += '<section class="glass card"><h2 class="h2"><span class="dot"></span>Perkembangan Nilai Ujian</h2>' + chart(h) + '</section>';
+    return html;
+  }
+
+  /* ----- latihan ----- */
+  function latBaru() { return { fase: 'awal', list: [], i: 0, ans: {}, b: 'semua', label: '' }; }
+
+  function latHitung() {
+    var dj = 0, bn = 0;
+    lat.list.forEach(function (id) {
+      var v = lat.ans[id];
+      if (v !== undefined) { dj++; if (v === Q[id].kunci) bn++; }
+    });
+    return { dj: dj, bn: bn };
+  }
+
+  function exTeks(ok, teks) {
+    return '<div class="ex ' + (ok ? 'ok' : 'bad') + '"><b>' + ic(ok ? 'check' : 'x', 16) + (ok ? 'Mengapa jawaban ini benar' : 'Mengapa jawaban ini salah') + '</b><p>' + esc(teks) + '</p></div>';
+  }
+
+  function vLatihan() {
+    if (lat.fase === 'awal') {
+      return '<h1 class="h1">Latihan Quiz</h1><p class="lead">Kerjakan seluruh soal dalam satu rangkaian. Setiap jawaban langsung dikoreksi dan dijelaskan, tanpa batas waktu.</p>' +
+        '<section class="glass card"><h2 class="h2"><span class="dot"></span>Cara Berlatih</h2><ol class="rules">' +
+        '<li>Bacalah setiap soal dengan teliti.</li>' +
+        '<li>Pilih satu jawaban yang paling tepat.</li>' +
+        '<li>Koreksi dan penjelasan langsung muncul setelah kamu memilih.</li>' +
+        '<li>Jawaban yang sudah dipilih tidak bisa diubah.</li>' +
+        '<li>Gunakan tombol Nomor untuk berpindah ke soal lain.</li>' +
+        '<li>Hasil latihan tidak disimpan di Progres.</li></ol>' +
+        (ALL.length ? '<button type="button" class="btn btn-block" data-act="lat-mulai">' + ic('pencil', 18) + 'Mulai Latihan (' + ALL.length + ' soal)</button>' : '<button type="button" class="btn btn-block" disabled>Mulai Latihan</button><p class="note" style="text-align:center">Belum ada soal tersedia.</p>') + '</section>';
+    }
+    var n = lat.list.length, c = latHitung();
+    if (lat.fase === 'selesai') {
+      var pct = Math.round(c.bn / n * 1000) / 10;
+      return '<h1 class="h1">Latihan Selesai</h1>' +
+        '<section class="glass card"><div class="eyebrow" style="color:var(--ink-2)">' + esc(lat.label) + '</div><div class="score">' + c.bn + '<small> / ' + n + ' benar</small></div><p class="lead">Ketepatan ' + fmtNum(pct) + '%. Hasil latihan tidak disimpan di Progres.</p></section>' +
+        '<div class="row"><button type="button" class="btn" data-act="lat-ulang">Ulangi</button><button type="button" class="btn btn-ghost" data-act="lat-keluar">Kembali</button></div>';
+    }
+    var id = lat.list[lat.i], q = Q[id], pilih = lat.ans[id], done = pilih !== undefined, sisa = n - c.dj;
+    var h = '<div class="qhead"><span class="chip">Soal ' + (lat.i + 1) + ' dari ' + n + '</span>' +
+      '<button type="button" class="chip chip-btn" data-act="nav-buka" aria-haspopup="dialog" aria-label="Buka navigasi soal">' + ic('grid', 14) + '</button>' +
+      '<button type="button" class="chip chip-btn chip-ico" data-act="calc-buka" aria-haspopup="dialog" aria-label="Buka kalkulator">' + ic('calc', 16) + '</button>' +
+      '<button type="button" class="btn btn-ghost btn-sm" style="margin-left:auto" data-act="lat-keluar">Keluar</button></div>';
+    h += '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + c.dj + '" aria-label="Kemajuan latihan"><i style="width:' + (c.dj / n * 100) + '%"></i></div>';
+    h += '<section class="glass card qsec"><p class="qtext">' + esc(q.tanya) + '</p><div class="opts">';
+    q.opsi.forEach(function (o, k) {
+      var cls = '', tag = '', ex = '';
+      if (done) {
+        if (k === q.kunci) {
+          cls = ' ok'; tag = '<span class="tag">' + (pilih === k ? 'Jawabanmu benar' : 'Jawaban yang benar') + '</span>';
+          ex = q.jelas ? exTeks(true, q.jelas) : '';
+        } else if (k === pilih) {
+          cls = ' bad'; tag = '<span class="tag">Jawabanmu salah</span>';
+          var jo = (q.jelasOpsi && q.jelasOpsi[k]) || (q.jelas ? 'Pilihan ini kurang tepat. Lihat penjelasan pada jawaban yang benar.' : '');
+          ex = jo ? exTeks(false, jo) : '';
+        } else cls = ' dim';
+      }
+      h += '<div class="og"><button type="button" class="opt' + cls + '" data-act="lat-jawab" data-k="' + k + '"' + (done ? ' disabled' : '') + '><span class="lt">' + LET[k] + '</span><span class="tx"><span>' + esc(o) + '</span>' + tag + '</span></button>' + ex + '</div>';
+    });
+    h += '</div></section>';
+    h += '<div class="ctl"><button type="button" class="btn btn-ghost btn-step" data-act="lat-prev" aria-label="Soal sebelumnya"' + (lat.i === 0 ? ' disabled' : '') + '>' + ic('left', 22) + '</button>' +
+      '<button type="button" class="btn btn-ghost" data-act="lat-akhiri"' + (sisa > 0 ? ' disabled' : '') + '>Akhiri Latihan</button>' +
+      '<button type="button" class="btn btn-ghost btn-step" data-act="lat-next" aria-label="Soal berikutnya"' + (lat.i >= n - 1 ? ' disabled' : '') + '>' + ic('chev', 22) + '</button></div>';
+    if (sisa > 0) h += '<p class="note" style="text-align:center">Masih ada ' + sisa + ' soal yang belum dijawab.</p>';
+    return h;
+  }
+
+  function vLatNavPopup() {
+    var n = lat.list.length, c = latHitung();
+    var g = '<div class="nav-grid" role="group" aria-label="Nomor soal">';
+    lat.list.forEach(function (x, i) {
+      var v = lat.ans[x], d = v !== undefined, ok = d && v === Q[x].kunci;
+      g += '<button type="button" class="nb' + (d ? (ok ? ' done' : ' bad') : '') + (i === lat.i ? ' now' : '') + '" data-act="lat-ke" data-i="' + i + '" aria-label="Soal ' + (i + 1) + (d ? (ok ? ', dijawab benar' : ', dijawab salah') : ', belum dijawab') + '"' + (i === lat.i ? ' aria-current="true"' : '') + '><span class="n">' + (i + 1) + '</span></button>';
+    });
+    g += '</div>';
+    return '<div class="ov" data-act="nav-tutup"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="navt" data-act="noop">' +
+      '<div class="sheet-h"><h2 class="h2" id="navt">Navigasi Soal</h2><button type="button" class="iconbtn" data-act="nav-tutup" aria-label="Tutup navigasi soal">' + ic('x', 18) + '</button></div>' +
+      '<p class="note">Dijawab ' + c.dj + ' dari ' + n + '. Belum dijawab ' + (n - c.dj) + '. Benar ' + c.bn + '. Salah ' + (c.dj - c.bn) + '.</p>' +
+      g + '<button type="button" class="btn btn-block" data-act="nav-tutup">Tutup</button></div></div>';
+  }
+
+  function latMulai(b) {
+    var ids, label;
+    if (!ALL.length) { toast('Belum ada soal tersedia.'); return; }
+    b = b || 'semua';
+    if (b === 'semua') { ids = ALL.slice(); label = 'Semua Soal'; }
+    else if (b === 'salah') {
+      var set = {};
+      analisis(getHist()).salah.forEach(function (s) { set[s.id] = true; });
+      ids = ALL.filter(function (id) { return set[id]; });
+      label = 'Soal yang sering salah';
+      if (!ids.length) { toast('Belum ada soal yang sering salah.'); return; }
+    } else if (BAB[b]) { ids = BAB[b].soal.map(function (s) { return s.id; }); label = BAB[b].judul; }
+    else return;
+    muat('Menyiapkan latihan', function () {
+      lat = { fase: 'jalan', list: ids, i: 0, ans: {}, b: b, label: label };
+      navOpen = false; calcOpen = false;
+      go('latihan');
+      render({ top: true });
+    });
+  }
+
+  /* ----- ujian ----- */
+  function ujianJumlah() { return Math.min(D.pengaturan.ujianJumlahSoal, ALL.length); }
+
+  function vUjian() {
+    if (aktif) return vUjianJalan();
+    if (ujHasil) return vUjianHasil();
+    var mnt = D.pengaturan.ujianMenit;
+    var h = getHist(), last = h.length ? h[h.length - 1] : null;
+    return '<h1 class="h1">Ujian Quiz</h1><p class="lead">Ujikan pemahamanmu tanpa petunjuk jawaban.</p>' +
+      '<section class="glass card"><h2 class="h2"><span class="dot"></span>Peraturan Pengerjaan Quiz</h2><ol class="rules">' +
+      '<li>Bacalah setiap soal dengan teliti.</li>' +
+      '<li>Pilih satu jawaban yang paling tepat.</li>' +
+      '<li>Setiap soal hanya memiliki satu jawaban benar.</li>' +
+      '<li>Waktu pengerjaan ' + mnt + ' menit.</li>' +
+      '<li>Periksa kembali jawaban sebelum menyelesaikan quiz.</li>' +
+      '<li>Hasil quiz ditampilkan setelah pengerjaan selesai.</li></ol>' +
+      (ALL.length ? '<button type="button" class="btn btn-block" data-act="uj-mulai">' + ic('clock', 18) + 'Mulai Ujian</button>' : '<button type="button" class="btn btn-block" disabled>Mulai Ujian</button><p class="note" style="text-align:center">Belum ada soal tersedia.</p>') + '</section>' +
+      (last ? '<p class="note">Ujian terakhir: nilai ' + fmtNum(last.nilai) + ' (' + last.benar + ' benar, ' + last.salah + ' salah), ' + esc(fmtDate(last.tanggal)) + '.</p>' : '');
+  }
+
+  function navGrid(a) {
+    var h = '<div class="nav-grid" role="group" aria-label="Nomor soal">';
+    a.ids.forEach(function (x, i) {
+      var d = a.answers[x] !== undefined && a.answers[x] !== null, r = !!a.flags[x];
+      var huruf = d ? LET[a.answers[x]] : '';
+      h += '<button type="button" class="nb' + (d ? (r ? ' ragu' : ' done') : '') + (i === a.idx ? ' now' : '') + '" data-act="uj-ke" data-i="' + i + '" aria-label="Soal ' + (i + 1) + (d ? ', dijawab ' + huruf : ', belum dijawab') + (r ? ', ragu-ragu' : '') + '"' + (i === a.idx ? ' aria-current="true"' : '') + '><span class="n">' + (d ? huruf : (i + 1)) + '</span></button>';
+    });
+    return h + '</div>';
+  }
+
+  function vNavPopup() {
+    var a = aktif, n = a.ids.length, dj = 0, rg = 0;
+    a.ids.forEach(function (x) { if (a.answers[x] !== undefined && a.answers[x] !== null) dj++; if (a.flags[x]) rg++; });
+    return '<div class="ov" data-act="nav-tutup"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="navt" data-act="noop">' +
+      '<div class="sheet-h"><h2 class="h2" id="navt">Navigasi Soal</h2><button type="button" class="iconbtn" data-act="nav-tutup" aria-label="Tutup navigasi soal">' + ic('x', 18) + '</button></div>' +
+      '<p class="note">Dijawab ' + dj + ' dari ' + n + '. Belum dijawab ' + (n - dj) + '. Ragu-ragu ' + rg + '.</p>' +
+      navGrid(a) +
+      '<button type="button" class="btn btn-block" data-act="nav-tutup">Tutup</button></div></div>';
+  }
+
+  function vUjianJalan() {
+    var a = aktif, n = a.ids.length, id = a.ids[a.idx], q = Q[id];
+    var jawab = a.answers, terjawab = 0, ragu = 0;
+    a.ids.forEach(function (x) { if (jawab[x] !== undefined && jawab[x] !== null) terjawab++; if (a.flags[x]) ragu++; });
+    var sisa = n - terjawab, isRagu = !!a.flags[id];
+    var rem = Math.max(0, Math.ceil((a.endAt - Date.now()) / 1000));
+    var h = '<div class="qhead"><span class="chip">Soal ' + (a.idx + 1) + ' dari ' + n + '</span>' +
+      '<button type="button" class="chip chip-btn" data-act="nav-buka" aria-haspopup="dialog" aria-label="Buka navigasi soal">' + ic('grid', 14) + '</button>' +
+      '<button type="button" class="chip chip-btn chip-ico" data-act="calc-buka" aria-haspopup="dialog" aria-label="Buka kalkulator">' + ic('calc', 16) + '</button>' +
+      '<span class="chip timer" id="timer" role="timer" aria-label="Sisa waktu" data-low="' + (rem < 60 ? 1 : 0) + '">' + fmtTime(rem) + '</span></div>';
+    h += '<section class="glass card qsec"><p class="qtext">' + esc(q.tanya) + '</p><div class="opts">';
+    q.opsi.forEach(function (o, k) {
+      var sel = jawab[id] === k;
+      h += '<button type="button" class="opt' + (sel ? ' sel' : '') + '" data-act="uj-jawab" data-k="' + k + '" aria-pressed="' + (sel ? 'true' : 'false') + '"><span class="lt">' + LET[k] + '</span><span class="tx"><span>' + esc(o) + '</span></span></button>';
+    });
+    h += '</div></section>';
+    h += '<div class="ctl"><button type="button" class="btn btn-ghost btn-step" data-act="uj-prev" aria-label="Soal sebelumnya"' + (a.idx === 0 ? ' disabled' : '') + '>' + ic('left', 22) + '</button>' +
+      '<button type="button" class="btn btn-ghost btn-ragu" data-act="uj-ragu" aria-pressed="' + (isRagu ? 'true' : 'false') + '"' + (jawab[id] === undefined || jawab[id] === null ? ' disabled title="Pilih jawaban dulu"' : '') + '>' + ic('flag', 16) + 'Ragu-ragu</button>' +
+      '<button type="button" class="btn btn-ghost btn-step" data-act="uj-next" aria-label="Soal berikutnya"' + (a.idx >= n - 1 ? ' disabled' : '') + '>' + ic('chev', 22) + '</button></div>';
+    if (confirming && sisa === 0) {
+      h += '<div class="confirm"><p><b>Akhiri ujian sekarang?</b> Jawaban tidak bisa diubah setelahnya.' + (ragu ? ' Masih ada ' + ragu + ' soal ditandai ragu-ragu.' : '') + '</p><div class="row"><button type="button" class="btn" data-act="uj-ya">Ya, akhiri</button><button type="button" class="btn btn-ghost" data-act="uj-batal">Kembali</button></div></div>';
+    } else {
+      h += '<button type="button" class="btn btn-block" data-act="uj-akhiri"' + (sisa > 0 ? ' disabled' : '') + '>Akhiri Ujian</button>';
+      if (sisa > 0) h += '<p class="note" style="text-align:center">Masih ada ' + sisa + ' soal yang belum dijawab.</p>';
+      else if (ragu) h += '<p class="note" style="text-align:center">Ada ' + ragu + ' soal ditandai ragu-ragu. Buka Nomor untuk meninjau.</p>';
+    }
+    return h;
+  }
+
+  function vUjianHasil() {
+    var r = ujHasil;
+    return '<h1 class="h1">Hasil Ujian</h1>' +
+      '<section class="glass card"><div class="eyebrow" style="color:var(--ink-2)">Nilai</div><div class="score">' + fmtNum(r.nilai) + '<small> / 100</small></div>' +
+      '<p class="lead">' + (r.waktuHabis ? 'Waktu habis. Soal yang belum dijawab dihitung salah.' : 'Ujian diakhiri.') + ' Lama pengerjaan ' + fmtTime(r.durasi) + '.</p></section>' +
+      '<div class="two"><div class="glass"><b>' + r.benar + '</b><span>Jawaban benar</span></div><div class="glass"><b>' + r.salah + '</b><span>Jawaban salah</span></div></div>' +
+      '<p class="note">Hasil ini sudah tersimpan di menu Progres.</p>' +
+      '<div class="row"><button type="button" class="btn" data-act="go" data-v="progres">Lihat Progres</button><button type="button" class="btn btn-ghost" data-act="uj-ulang">Ujian lagi</button></div>';
+  }
+
+  function ujMulai() {
+    if (!ALL.length) { toast('Belum ada soal tersedia.'); return; }
+    muat('Menyiapkan ujian', ujMulaiInti);
+  }
+
+  function ujMulaiInti() {
+    var ids = shuffle(ALL).slice(0, ujianJumlah());
+    var now = Date.now();
+    aktif = { id: now.toString(36) + Math.random().toString(36).slice(2, 6), startAt: now, endAt: now + D.pengaturan.ujianMenit * 60000, ids: ids, answers: {}, flags: {}, idx: 0 };
+    ujHasil = null; confirming = false; navOpen = false;
+    saveAktif();
+    render({ top: true });
+  }
+
+  function finish(waktuHabis) {
+    if (!aktif) return;
+    var a = aktif, benar = 0, total = a.ids.length;
+    var detail = {};
+    a.ids.forEach(function (id) {
+      var jw = a.answers[id];
+      if (jw === undefined || jw === null) detail[id] = -1;
+      else if (jw === Q[id].kunci) { detail[id] = 1; benar++; }
+      else detail[id] = 0;
+    });
+    var end = Math.min(Date.now(), a.endAt);
+    var rec = {
+      id: a.id, tanggal: new Date(end).toISOString(), benar: benar, salah: total - benar, total: total,
+      nilai: Math.round(benar / total * 1000) / 10, durasi: Math.round((end - a.startAt) / 1000), waktuHabis: !!waktuHabis,
+      detail: detail
+    };
+    var h = getHist();
+    h.push(rec);
+    setHist(h);
+    aktif = null; sdel(K_AKTIF); confirming = false; ujHasil = rec;
+    if (view !== 'ujian') toast('Waktu ujian habis. Hasil sudah tersimpan di Progres.');
+    render({ top: true });
+  }
+
+  function tick() {
+    if (!aktif) return;
+    var rem = aktif.endAt - Date.now();
+    if (rem <= 0) { finish(true); return; }
+    var el = document.getElementById('timer');
+    if (el) {
+      var s = Math.ceil(rem / 1000);
+      el.textContent = fmtTime(s);
+      el.setAttribute('data-low', s < 60 ? '1' : '0');
+    }
+  }
+  setInterval(tick, 500);
+  document.addEventListener('visibilitychange', tick);
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' || !(navOpen || calcOpen)) return;
+    var kal = calcOpen;
+    closePopup(function () { fokus(kal ? 'calc-buka' : 'nav-buka'); });
+  });
+
+  /* ----- kalkulator ----- */
+  var OPSYM = { '+': '+', '-': '\u2212', '*': '\u00d7', '/': '\u00f7' };
+  function calcBaru() { return { cur: '0', acc: null, op: null, fresh: false, expr: '', err: false }; }
+  calc = calcBaru();
+  function cFmt(x) {
+    x = String(x);
+    if (/e/i.test(x)) return x.replace('.', ',');
+    var neg = x.charAt(0) === '-'; if (neg) x = x.slice(1);
+    var p = x.split('.'), ip = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return (neg ? '-' : '') + ip + (p.length > 1 ? ',' + p[1] : '');
+  }
+  function cHitung(a, o, b) {
+    var r = o === '+' ? a + b : o === '-' ? a - b : o === '*' ? a * b : (b === 0 ? NaN : a / b);
+    if (!isFinite(r)) return null;
+    return String(parseFloat(r.toPrecision(12)));
+  }
+  function cError() { calc = calcBaru(); calc.err = true; }
+  function cTekan(k) {
+    if (calc.err && k !== 'C') calc = calcBaru();
+    var c = calc, r;
+    if (k.length === 1 && k >= '0' && k <= '9') {
+      if (c.fresh) { c.cur = k; c.fresh = false; }
+      else if (c.cur.replace(/[-.]/g, '').length < 15) c.cur = c.cur === '0' ? k : (c.cur === '-0' ? '-' + k : c.cur + k);
+    } else if (k === '.') {
+      if (c.fresh) { c.cur = '0.'; c.fresh = false; }
+      else if (c.cur.indexOf('.') < 0) c.cur += '.';
+    } else if (k === 'C') {
+      calc = calcBaru();
+    } else if (k === 'B') {
+      if (!c.fresh) c.cur = (c.cur.length > 1 && !(c.cur.length === 2 && c.cur.charAt(0) === '-')) ? c.cur.slice(0, -1) : '0';
+    } else if (k === 'N') {
+      if (c.cur !== '0' && c.cur !== '0.') c.cur = c.cur.charAt(0) === '-' ? c.cur.slice(1) : '-' + c.cur;
+    } else if (k === '%') {
+      c.cur = String(parseFloat((parseFloat(c.cur) / 100).toPrecision(12))); c.fresh = true;
+    } else if (OPSYM[k]) {
+      if (c.op && c.acc !== null && !c.fresh) {
+        r = cHitung(c.acc, c.op, parseFloat(c.cur));
+        if (r === null) { cError(); return; }
+        c.acc = parseFloat(r); c.cur = r;
+      } else c.acc = parseFloat(c.cur);
+      c.op = k; c.fresh = true; c.expr = cFmt(c.cur) + ' ' + OPSYM[k];
+    } else if (k === '=') {
+      if (c.op && c.acc !== null) {
+        var b = c.fresh ? c.acc : parseFloat(c.cur);
+        r = cHitung(c.acc, c.op, b);
+        if (r === null) { cError(); return; }
+        c.expr = cFmt(c.acc) + ' ' + OPSYM[c.op] + ' ' + cFmt(b) + ' =';
+        c.cur = r; c.acc = null; c.op = null; c.fresh = true;
+      }
+    }
+  }
+  function calcTeks() { return calc.err ? 'Tidak valid' : cFmt(calc.cur); }
+  function calcUkuran(t) { return t.length > 14 ? 22 : (t.length > 10 ? 28 : 36); }
+  function calcUpdate() {
+    var d = document.getElementById('calcd'), e = document.getElementById('calce');
+    if (!d || !e) return;
+    var t = calcTeks();
+    d.textContent = t; d.style.fontSize = calcUkuran(t) + 'px';
+    e.textContent = calc.expr || '\u00a0';
+  }
+  function vCalcPopup() {
+    var K = [
+      ['C', 'C', 'fn', 'Hapus semua'], ['B', ic('bksp', 22), 'fn', 'Hapus satu angka'], ['%', '%', 'fn', 'Persen'], ['/', '\u00f7', 'op', 'Bagi'],
+      ['7', '7'], ['8', '8'], ['9', '9'], ['*', '\u00d7', 'op', 'Kali'],
+      ['4', '4'], ['5', '5'], ['6', '6'], ['-', '\u2212', 'op', 'Kurang'],
+      ['1', '1'], ['2', '2'], ['3', '3'], ['+', '+', 'op', 'Tambah'],
+      ['N', '\u00b1', 'fn', 'Ubah positif atau negatif'], ['0', '0'], ['.', ',', '', 'Koma desimal'], ['=', '=', 'op', 'Sama dengan']
+    ];
+    var t = calcTeks();
+    return '<div class="ov" data-act="calc-tutup"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="calct" data-act="noop">' +
+      '<div class="sheet-h"><h2 class="h2" id="calct">Kalkulator</h2><button type="button" class="iconbtn" data-act="calc-tutup" aria-label="Tutup kalkulator">' + ic('x', 18) + '</button></div>' +
+      '<div class="cdisp"><div class="ce" id="calce">' + (calc.expr ? esc(calc.expr) : '&nbsp;') + '</div><div class="cd" id="calcd" style="font-size:' + calcUkuran(t) + 'px">' + esc(t) + '</div></div>' +
+      '<div class="ckeys">' + K.map(function (x) {
+        return '<button type="button" class="ck' + (x[2] ? ' ' + x[2] : '') + '" data-act="calc-key" data-k="' + x[0] + '"' + (x[3] ? ' aria-label="' + x[3] + '"' : '') + '>' + x[1] + '</button>';
+      }).join('') + '</div></div></div>';
+  }
+
+  /* ----- progres ----- */
+  function vProgres() {
+    var h = getHist(), st = stats(h);
+    var html = '<h1 class="h1">Progres Ujian</h1><p class="lead">Riwayat nilai dari ujian quiz yang sudah kamu selesaikan.</p>' + statsHtml(st);
+    html += '<section class="glass card"><h2 class="h2"><span class="dot"></span>Perkembangan Nilai</h2>' + chart(h) + '</section>';
+    html += vPenguasaan(h, analisis(h));
+    html += '<section class="glass card"><h2 class="h2"><span class="dot"></span>Riwayat</h2>';
+    if (!h.length) html += '<p class="empty">Belum ada riwayat ujian.</p>';
+    else {
+      html += '<ul class="hist">';
+      h.slice().reverse().forEach(function (r) {
+        html += '<li><div class="hn"><b>' + esc(fmtDate(r.tanggal)) + '</b><span>' + r.benar + ' benar, ' + r.salah + ' salah' + (r.waktuHabis ? ', waktu habis' : '') + '</span></div><span class="nv">' + fmtNum(r.nilai) + '</span></li>';
+      });
+      html += '</ul>';
+    }
+    html += '</section>';
+    html += '<section class="glass card"><h2 class="h2"><span class="dot"></span>Cadangan riwayat</h2>' +
+      '<p class="lead">Riwayat tersimpan di browser ini saja. Simpan cadangan agar tidak hilang saat data browser dihapus atau saat berganti HP.</p>' +
+      '<div class="row"><button type="button" class="btn btn-ghost" data-act="pr-salin"' + (h.length ? '' : ' disabled') + '>Salin cadangan</button>' +
+      (window.QL_CAN_DOWNLOAD ? '<button type="button" class="btn btn-ghost" data-act="pr-unduh"' + (h.length ? '' : ' disabled') + '>Unduh file</button>' : '') + '</div>';
+    if (cadangan) html += '<label for="cad" class="note">Salin teks berikut secara manual:</label><textarea id="cad" readonly>' + esc(cadangan) + '</textarea>';
+    html += '<label for="imp" class="note">Pulihkan dari cadangan: tempel teks cadangan atau pilih file.</label>' +
+      '<textarea id="imp" placeholder="Tempel teks cadangan di sini"></textarea>' +
+      '<div class="row"><button type="button" class="btn btn-sm" data-act="pr-pulihkan">Pulihkan</button>' +
+      '<span class="btn btn-ghost btn-sm filebtn">Pilih file cadangan<input type="file" id="impFile" accept=".json,application/json,text/plain" aria-label="Pilih file cadangan"></span></div></section>';
+    if (h.length) {
+      if (hapusConfirm) html += '<div class="confirm"><p><b>Hapus semua riwayat ujian?</b> Tindakan ini tidak bisa dibatalkan.</p><div class="row"><button type="button" class="btn" data-act="pr-hapus-ya">Ya, hapus</button><button type="button" class="btn btn-ghost" data-act="pr-hapus-batal">Batal</button></div></div>';
+      else html += '<button type="button" class="btn btn-ghost btn-block" data-act="pr-hapus">Hapus semua riwayat</button>';
+    }
+    return html;
+  }
+
+  function soalItem(s, tipe) {
+    var q = Q[s.id], n = s.benar + s.salah;
+    var info = tipe === 'salah' ? 'Salah ' + s.salah + ' dari ' + n + ' kali' : 'Benar ' + s.benar + ' dari ' + n + ' kali';
+    return '<li><div class="qt">' + esc(q.tanya) + '</div><div class="qm"><span class="chip">' + esc(q.babJudul.split('.')[0]) + '</span><span class="small muted">' + info + '</span></div></li>';
+  }
+  function daftarSoal(judul, list, tipe, kosong) {
+    var html = '<section class="glass card"><h2 class="h2"><span class="dot"></span>' + judul + '</h2>';
+    if (!list.length) return html + '<p class="empty">' + kosong + '</p></section>';
+    html += '<ul class="qlist">' + list.slice(0, 10).map(function (s) { return soalItem(s, tipe); }).join('') + '</ul>';
+    if (list.length > 10) html += '<p class="note">Dan ' + (list.length - 10) + ' soal lainnya.</p>';
+    if (tipe === 'salah') html += '<button type="button" class="btn btn-block" data-act="lat-mulai" data-b="salah">' + ic('pencil', 18) + 'Latih soal-soal ini</button>';
+    return html + '</section>';
+  }
+  function vPenguasaan(h, an) {
+    var html = '<section class="glass card"><h2 class="h2"><span class="dot"></span>Penguasaan per Bab</h2>';
+    if (!h.length) return html + '<p class="empty">Selesaikan satu ujian untuk melihat bab yang sudah dan belum kamu kuasai.</p></section>';
+    if (!an.ada) return html + '<p class="empty">Ujian sebelumnya belum mencatat hasil per soal. Analisis muncul setelah ujian berikutnya selesai.</p></section>';
+    html += '<ul class="mast">';
+    an.bab.forEach(function (x) {
+      var teks = !x.n ? 'Belum ada jawaban' : (x.n < MIN_BAB ? 'Baru ' + x.n + ' jawaban (minimal ' + MIN_BAB + ' agar dinilai)' : x.n + ' jawaban, ' + x.pct + '% benar');
+      html += '<li class="mrow"><div class="mtop"><span class="mt">' + esc(x.b.judul) + '</span><span class="pill pill-' + x.st.k + '">' + x.st.t + '</span></div>' +
+        '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + x.pct + '" aria-label="Persentase benar ' + esc(x.b.judul) + '"><i style="width:' + x.pct + '%"></i></div>' +
+        '<div class="mbot"><span class="small muted">' + teks + '</span><button type="button" class="btn btn-ghost btn-sm" data-act="lat-mulai" data-b="' + x.b.id + '">Latih</button></div></li>';
+    });
+    html += '</ul><p class="note">Dihitung dari semua jawaban di riwayat ujian. Dikuasai mulai ' + BATAS_KUASAI + '% benar, Cukup mulai ' + BATAS_CUKUP + '%. Soal yang tidak sempat dijawab karena waktu habis tidak ikut dihitung.</p></section>';
+    html += daftarSoal('Soal yang Sering Salah', an.salah, 'salah', 'Belum ada soal yang sering salah. Soal baru dinilai setelah dijawab minimal ' + MIN_SOAL + ' kali.');
+    html += daftarSoal('Soal yang Selalu Benar', an.benar, 'benar', 'Belum ada soal yang dijawab benar terus. Soal baru dinilai setelah dijawab minimal ' + MIN_SOAL + ' kali.');
+    return html;
+  }
+
+  function cadanganJson() {
+    return JSON.stringify({ app: 'quizlearn', versi: 2, diekspor: new Date().toISOString(), riwayat: getHist() });
+  }
+  function pulihkan(text) {
+    var obj = parse((text || '').trim(), null);
+    var arr = Array.isArray(obj) ? obj : (obj && Array.isArray(obj.riwayat) ? obj.riwayat : null);
+    if (!arr) { toast('Teks cadangan tidak dikenali. Pastikan disalin utuh.'); return; }
+    var valid = arr.filter(validRec).map(cleanRec);
+    if (!valid.length) { toast('Tidak ada riwayat yang valid di cadangan ini.'); return; }
+    var h = getHist(), ada = {}, tambah = 0;
+    h.forEach(function (r) { ada[r.id] = true; });
+    valid.forEach(function (r) { if (!ada[r.id]) { ada[r.id] = true; h.push(r); tambah++; } });
+    h.sort(function (a, b) { return new Date(a.tanggal) - new Date(b.tanggal); });
+    setHist(h);
+    toast(tambah + ' riwayat berhasil dipulihkan.');
+    render();
+  }
+
+  /* ---------- aksi ---------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!t || t.disabled) return;
+    var act = t.getAttribute('data-act');
+    var a = aktif;
+
+    if (act === 'noop') return;
+    if (act === 'go') { go(t.getAttribute('data-v')); return; }
+
+    if (act === 'lat-mulai') { latMulai(t.getAttribute('data-b')); return; }
+    if (act === 'lat-jawab') {
+      var lid = lat.list[lat.i];
+      if (lat.fase !== 'jalan' || lat.ans[lid] !== undefined) return;
+      lat.ans[lid] = parseInt(t.getAttribute('data-k'), 10);
+      render(); return;
+    }
+    if (act === 'lat-prev') { pindahSoal('prev', function () { if (lat.i > 0) lat.i--; }); return; }
+    if (act === 'lat-next') { pindahSoal('next', function () { if (lat.i < lat.list.length - 1) lat.i++; }); return; }
+    if (act === 'lat-ke') {
+      var latTujuan = parseInt(t.getAttribute('data-i'), 10);
+      if (latTujuan !== lat.i) { var latArah = latTujuan < lat.i ? 'prev' : 'next'; lat.i = latTujuan; render({ top: true, questionDirection: latArah }); }
+      closePopup(function () { fokus('nav-buka'); });
+      return;
+    }
+    if (act === 'lat-akhiri') { if (latHitung().dj >= lat.list.length) { lat.fase = 'selesai'; navOpen = false; render({ top: true }); } return; }
+    if (act === 'lat-ulang') { latMulai(lat.b); return; }
+    if (act === 'lat-keluar') { lat = latBaru(); navOpen = false; render({ top: true }); return; }
+
+    if (act === 'uj-mulai') { ujMulai(); return; }
+    if (act === 'uj-ulang') { ujHasil = null; render({ top: true }); return; }
+    if (!a && act.indexOf('uj-') === 0) return;
+    if (act === 'uj-jawab') { a.answers[a.ids[a.idx]] = parseInt(t.getAttribute('data-k'), 10); confirming = false; saveAktif(); render(); return; }
+    if (act === 'uj-ke') {
+      var ujTujuan = parseInt(t.getAttribute('data-i'), 10);
+      if (ujTujuan !== a.idx) { var ujArah = ujTujuan < a.idx ? 'prev' : 'next'; a.idx = ujTujuan; confirming = false; saveAktif(); render({ top: true, questionDirection: ujArah }); }
+      closePopup(function () { fokus('nav-buka'); });
+      return;
+    }
+    if (act === 'uj-ragu') { var rid = a.ids[a.idx]; if (a.answers[rid] === undefined || a.answers[rid] === null) return; if (a.flags[rid]) delete a.flags[rid]; else a.flags[rid] = true; saveAktif(); render(); return; }
+    if (act === 'calc-buka') { calcOpen = true; navOpen = false; syncOverlay(); var kb = $ov.querySelector('.iconbtn'); if (kb) kb.focus(); return; }
+    if (act === 'calc-tutup') { closePopup(function () { fokus('calc-buka'); }); return; }
+    if (act === 'calc-key') { cTekan(t.getAttribute('data-k')); calcUpdate(); return; }
+    if (act === 'nav-buka') { navOpen = true; calcOpen = false; syncOverlay(); var cb = $ov.querySelector('.iconbtn'); if (cb) cb.focus(); return; }
+    if (act === 'nav-tutup') { closePopup(function () { fokus('nav-buka'); }); return; }
+    if (act === 'uj-prev') { pindahSoal('prev', function () { if (a.idx > 0) a.idx--; confirming = false; saveAktif(); }); return; }
+    if (act === 'uj-next') { pindahSoal('next', function () { if (a.idx < a.ids.length - 1) a.idx++; confirming = false; saveAktif(); }); return; }
+    if (act === 'uj-akhiri') { confirming = true; render(); return; }
+    if (act === 'uj-batal') { confirming = false; render(); return; }
+    if (act === 'uj-ya') { finish(false); return; }
+
+    if (act === 'pr-salin') {
+      var json = cadanganJson();
+      var fallback = function () { cadangan = json; render(); toast('Salin teks cadangan secara manual dari kotak di bawah.'); };
+      try {
+        navigator.clipboard.writeText(json).then(function () { cadangan = null; toast('Cadangan disalin. Tempel dan simpan di catatan atau pesan ke diri sendiri.'); }, fallback);
+      } catch (err) { fallback(); }
+      return;
+    }
+    if (act === 'pr-unduh') {
+      try {
+        var blob = new Blob([cadanganJson()], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url; link.download = 'cadangan-quizlearn.json';
+        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        toast('File cadangan diunduh.');
+      } catch (err) { toast('Unduh gagal. Gunakan tombol Salin cadangan.'); }
+      return;
+    }
+    if (act === 'pr-pulihkan') { var ta = document.getElementById('imp'); pulihkan(ta ? ta.value : ''); return; }
+    if (act === 'pr-hapus') { hapusConfirm = true; render(); return; }
+    if (act === 'pr-hapus-batal') { hapusConfirm = false; render(); return; }
+    if (act === 'pr-hapus-ya') { setHist([]); hapusConfirm = false; ujHasil = null; toast('Riwayat dihapus.'); render(); return; }
+  });
+
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.id === 'impFile' && e.target.files && e.target.files[0]) {
+      var rd = new FileReader();
+      rd.onload = function () { pulihkan(String(rd.result || '')); };
+      rd.onerror = function () { toast('File tidak bisa dibaca.'); };
+      rd.readAsText(e.target.files[0]);
+    }
+  });
+
+  /* ---------- layar sambutan ---------- */
+  function welcome() {
+    var el = document.createElement('div');
+    el.id = 'welcome'; el.className = 'wel'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-labelledby', 'welt');
+    el.innerHTML = '<div class="wel-blur"></div><div class="wel-body"><div class="logo" aria-hidden="true">' + ic('bolt', 22) + '</div><h1 class="wel-t" id="welt">Are you ready?</h1><button type="button" class="btn wel-btn" id="welbtn">I am ready!</button></div>';
+    document.body.appendChild(el);
+    var inertEls = [document.querySelector('.app'), document.getElementById('dock')];
+    inertEls.forEach(function (x) { if (x) x.setAttribute('inert', ''); });
+    document.body.style.overflow = 'hidden';
+    var btn = document.getElementById('welbtn'), blur = el.querySelector('.wel-blur'), body = el.querySelector('.wel-body');
+    btn.focus();
+    var busy = false;
+    function selesai() {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      inertEls.forEach(function (x) { if (x) x.removeAttribute('inert'); });
+      document.body.style.overflow = navOpen ? 'hidden' : '';
+      try { $main.focus({ preventScroll: true }); } catch (e) {}
+    }
+    btn.addEventListener('click', function () {
+      if (busy) return; busy = true;
+      var r = btn.getBoundingClientRect();
+      bukaBlur(el, blur, body, r.left + r.width / 2, r.top + r.height / 2, selesai);
+    });
+  }
+
+  /* Animasi buka buram (dipakai layar sambutan dan layar loading): lingkaran jernih melebar dari titik (cx, cy) */
+  function bukaBlur(el, blur, body, cx, cy, selesai) {
+    var W = window.innerWidth, H = window.innerHeight;
+    var dx = Math.max(cx, W - cx), dy = Math.max(cy, H - cy);
+    var soft = 160, total = Math.sqrt(dx * dx + dy * dy) + soft;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    body.classList.add('out');
+    if (reduce || !window.requestAnimationFrame) { el.classList.add('fade'); setTimeout(selesai, 260); return; }
+    var dur = 1100, t0 = null;
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur), R = ease(p) * total;
+      var sf = Math.min(soft, R);
+      var m = 'radial-gradient(circle at ' + cx + 'px ' + cy + 'px, transparent ' + R + 'px, #000 ' + (R + sf) + 'px)';
+      blur.style.webkitMaskImage = m; blur.style.maskImage = m;
+      if (p < 1) requestAnimationFrame(frame); else selesai();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- layar loading 0-100% sebelum latihan / ujian dimulai ---------- */
+  var memuat = false;
+  function muat(label, aksi) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (memuat) return;
+    if (reduce || !window.requestAnimationFrame) { aksi(); return; }
+    memuat = true;
+    var el = document.createElement('div');
+    el.className = 'wel ld'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', label);
+    el.innerHTML = '<div class="wel-blur"></div><div class="wel-body"><div class="logo" aria-hidden="true">' + ic('bolt', 22) + '</div>' +
+      '<div class="ld-pct">0%</div><div class="ld-bar" aria-hidden="true"><i></i></div><div class="ld-lbl">' + esc(label) + '</div></div>';
+    document.body.appendChild(el);
+    var inertEls = [document.querySelector('.app'), document.getElementById('dock')];
+    inertEls.forEach(function (x) { if (x) x.setAttribute('inert', ''); });
+    document.body.style.overflow = 'hidden';
+    var pct = el.querySelector('.ld-pct'), bar = el.querySelector('.ld-bar i'), blur = el.querySelector('.wel-blur'), body = el.querySelector('.wel-body');
+    function selesai() {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      inertEls.forEach(function (x) { if (x) x.removeAttribute('inert'); });
+      document.body.style.overflow = (navOpen || calcOpen) ? 'hidden' : '';
+      memuat = false;
+      try { $main.focus({ preventScroll: true }); } catch (e) {}
+    }
+    var dur = 1000, t0 = null;
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur), e = ease(p);
+      pct.textContent = Math.round(e * 100) + '%';
+      bar.style.transform = 'scaleX(' + e + ')';
+      if (p < 1) { requestAnimationFrame(frame); return; }
+      aksi();   // latihan/ujian dibangun di balik layar buram
+      setTimeout(function () {
+        var r = body.getBoundingClientRect();
+        bukaBlur(el, blur, body, r.left + r.width / 2, r.top + r.height / 2, selesai);
+      }, 180);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- efek tekan tombol (delegasi: berlaku juga untuk tombol yang dibuat dinamis) ---------- */
+  (function () {
+    var selector = 'button:not([disabled]),input[type="button"]:not([disabled]),input[type="submit"]:not([disabled]),input[type="reset"]:not([disabled]),[role="button"]:not([aria-disabled="true"]),.btn:not([disabled]),.back:not([disabled]),.filebtn:not([disabled]),.chip-btn:not([disabled])';
+    var pressed = null, releaseTimer = null;
+    function release() {
+      if (pressed) pressed.classList.remove('ql-pressed');
+      pressed = null;
+      if (releaseTimer) { clearTimeout(releaseTimer); releaseTimer = null; }
+    }
+    document.addEventListener('pointerdown', function (e) {
+      var el = e.target && e.target.closest ? e.target.closest(selector) : null;
+      if (!el) return;
+      release();
+      pressed = el;
+      el.classList.add('ql-pressed');
+    }, true);
+    function scheduleRelease() {
+      if (releaseTimer) clearTimeout(releaseTimer);
+      releaseTimer = setTimeout(release, 170);
+    }
+    document.addEventListener('pointerup', scheduleRelease, true);
+    document.addEventListener('pointercancel', release, true);
+    window.addEventListener('blur', release);
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== ' ' && e.key !== 'Enter') return;
+      var el = document.activeElement;
+      if (el && el.matches && el.matches(selector)) { pressed = el; el.classList.add('ql-pressed'); }
+    }, true);
+    document.addEventListener('keyup', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') scheduleRelease();
+    }, true);
+  })();
+
+  /* ---------- mulai ---------- */
+  if (aktif && aktif.endAt <= Date.now()) {
+    finish(true);
+    toast('Waktu ujian sebelumnya sudah habis. Hasil tersimpan di Progres.');
+  } else {
+    render();
+  }
+  if (!aktif) welcome();   // ujian yang sedang berjalan tidak ditunda oleh layar sambutan
+})();
+
+</script>
+
+</body></html>
